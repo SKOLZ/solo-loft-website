@@ -1,0 +1,36 @@
+{
+  "name": "solo-loft-website",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm codegen --watch & next dev",
+    "build": "pnpm codegen & next build",
+    "start": "next start",
+    "lint": "next lint",
+    "codegen": "graphql-codegen --config codegen.ts"
+  },
+  "dependencies": {
+    "@svgr/webpack": "^8.1.0",
+    "add": "^2.0.6",
+    "graphql": "^16.9.0",
+    "graphql-request": "^7.1.0",
+    "graphql-tag": "^2.12.6",
+    "next": "14.2.5",
+    "react": "^18",
+    "react-dom": "^18",
+    "sass": "^1.78.0"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/client-preset": "4.2.4",
+    "@graphql-codegen/introspection": "4.0.3",
+    "@graphql-codegen/typescript-graphql-request": "^6.2.0",
+    "@parcel/watcher": "^2.4.1",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.5",
+    "typescript": "^5"
+  }
+}

@@ -1,0 +1,16 @@
+fragment PropertySummary on Property {
+  id
+  transactionType
+  address
+  district
+  meters
+  features {
+    ...Feature
+  }
+  cost
+  costCurrency
+  expenses
+  photos(first: 1) {
+    url
+  }
+}

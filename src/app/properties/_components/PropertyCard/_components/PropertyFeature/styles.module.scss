@@ -1,0 +1,17 @@
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.feature-icon {
+  font-size: 1.5rem;
+  color: var(--white);
+}
+
+.feature-label {
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  letter-spacing: 2px;
+  color: var(--gray-5);
+}

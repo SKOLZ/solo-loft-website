@@ -1,0 +1,3 @@
+fragment Room on Room {
+  amount
+}

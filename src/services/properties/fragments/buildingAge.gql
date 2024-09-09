@@ -1,0 +1,3 @@
+fragment BuildingAge on BuildingAge {
+  years
+}

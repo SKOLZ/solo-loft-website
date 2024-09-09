@@ -1,0 +1,33 @@
+.header {
+  position: relative;
+
+  &::before {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 100dvw;
+    max-width: 100%;
+    background-color: oklch(from var(--white) l c h / 0.12);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
+
+  &::after {
+    content: url('../../../assets/cross.svg');
+    display: block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    bottom: -10px;
+    right: max((100% - 1280px) / 2 + 2.5rem - 10px, 2.5rem - 10px);
+    z-index: 1;
+  }
+}
+
+.header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-block: 2.5rem;
+}

@@ -1,0 +1,15 @@
+.hero {
+  align-items: center;
+  padding-block: 5rem 2.5rem;
+  text-align: center;
+}
+
+.hero-logo {
+  font-size: 10rem;
+  font-weight: 100;
+  line-height: 15rem;
+  color: var(--white);
+  letter-spacing: 10px;
+  text-transform: uppercase;
+  text-shadow: 0 0 5px oklch(from var(--white) l c h / 0.4), 0 0 20px oklch(from var(--white) l c h / 0.4);
+}

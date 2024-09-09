@@ -1,0 +1,21 @@
+.navbar {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem;
+  background-color: var(--gray-1);
+  border-radius: 3rem;
+}
+
+.navbar-item {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  letter-spacing: 2px;
+  padding: 0.5rem 1rem;
+  border-radius: 2.5rem;
+  color: var(--white);
+  text-transform: uppercase;
+  
+  &.active {
+    background-color: var(--gray-2);
+  }
+}

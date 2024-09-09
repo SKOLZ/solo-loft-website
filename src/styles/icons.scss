@@ -1,0 +1,106 @@
+/*--------------------------------
+
+solo-loft icon font
+Generated using nucleoapp.com
+
+-------------------------------- */
+
+$ic-font-path: "../fonts" !default;
+
+@font-face {
+  font-family: 'solo-loft';
+  src: url('#{$ic-font-path}/solo-loft.eot');
+  src: url('#{$ic-font-path}/solo-loft.eot') format('embedded-opentype'),
+       url('#{$ic-font-path}/solo-loft.woff2') format('woff2'),
+       url('#{$ic-font-path}/solo-loft.woff') format('woff'),
+       url('#{$ic-font-path}/solo-loft.ttf') format('truetype'),
+       url('#{$ic-font-path}/solo-loft.svg') format('svg');
+}
+
+/* base class */
+.ic {
+  display: inline-block;
+  font: normal normal normal 1em/1 'solo-loft';
+  color: inherit;
+  flex-shrink: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* size examples - relative units */
+.ic-sm {
+  font-size: 0.8em;
+}
+
+.ic-lg {
+  font-size: 1.2em;
+}
+
+/* size examples - absolute units */
+.ic-16 {
+  font-size: 16px;
+}
+
+.ic-32 {
+  font-size: 32px;
+}
+
+/* rotate the icon infinitely */
+.ic-is-spinning {
+  animation: ic-spin 1s infinite linear;
+}
+
+@keyframes ic-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* transform */
+.ic-rotate-90  {
+	transform: rotate(90deg);
+}
+
+.ic-rotate-180 {
+	transform: rotate(180deg);
+}
+
+.ic-rotate-270 {
+	transform: rotate(270deg);
+}
+
+.ic-flip-y {
+	transform: scaleY(-1);
+}
+
+.ic-flip-x {
+	transform: scaleX(-1);
+}
+
+/* icons */
+$icons: (
+  'bathroom': 'ea01',
+  'bed': 'ea02',
+  'calendar': 'ea03',
+  'covered-meters': 'ea04',
+  'covered-squared-meters-filled': 'ea05',
+  'door': 'ea06',
+  'garage': 'ea07',
+  'squared-meters': 'ea08',
+  'sun': 'ea09',
+  'toilet': 'ea0a',
+  'window': 'ea0b',
+);
+
+@function unicode($str) {
+  @return unquote("\"\\#{$str}\"");
+}
+
+@each $name, $code in $icons {
+  .ic-#{""+$name}::before {
+    content: unicode($code);
+  }
+}

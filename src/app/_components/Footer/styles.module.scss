@@ -1,0 +1,71 @@
+.footer {
+  position: relative;
+
+  &::before {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 100dvw;
+    max-width: 100%;
+    background-color: oklch(from var(--white) l c h / 0.12);
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  &::after {
+    content: url('../../../assets/cross.svg');
+    display: block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: -9px;
+    left: max((100% - 1280px) / 2 + 2.5rem - 9px, 2.5rem - 9px);
+    z-index: 1;
+  }
+}
+
+.footer-container {
+  padding-block: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2.5rem;
+}
+
+.footer-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.footer-group-title {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  letter-spacing: 2px;
+  color: var(--gray-5);
+  position: relative;
+  text-transform: uppercase;
+
+  &::after {
+    content: '';
+    height: 1px;
+    width: 2rem;
+    background-color: var(--gray-7);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+}
+
+.footer-group-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.footer-group-logo {
+  width: 100%;
+  max-width: 120px;
+  margin-bottom: 0.375rem;
+}
