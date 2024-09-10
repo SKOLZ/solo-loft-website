@@ -1,9 +1,13 @@
-import { Feature, LuminousStages, Orientations } from "@/generated/graphql";
+import {
+  FeatureFragment,
+  LuminousStages,
+  Orientations,
+} from "@/generated/graphql";
 import { pluralizeString } from "@/utils/pluralizeString";
 import type { MetersFeature } from "./types";
 
 export const featureTypenameIconMap: Record<
-  Feature["__typename"] | MetersFeature["__typename"],
+  FeatureFragment["__typename"] | MetersFeature["__typename"],
   string
 > = {
   Bathroom: "ic-bathroom",
@@ -30,7 +34,7 @@ const luminosityLevelMap: Record<LuminousStages, string> = {
   veryLuminous: "Muy luminoso",
 };
 
-export const getFeatureText = (feature: Feature | MetersFeature) => {
+export const getFeatureText = (feature: FeatureFragment | MetersFeature) => {
   switch (feature.__typename) {
     case "Meters":
       return `${feature.amount} m²`;

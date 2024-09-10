@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./styles.module.scss";
-import { PropertySummary } from "@/generated/graphql";
+import { PropertySummaryFragment } from "@/generated/graphql";
 import { PropertyFeature } from "./_components/PropertyFeature";
 import {
   districtTextMap,
@@ -10,7 +10,7 @@ import {
 import { formatNumber } from "@/utils/formatNumber";
 
 interface Props {
-  propertySummary: PropertySummary;
+  propertySummary: PropertySummaryFragment;
 }
 
 export const PropertyCard: React.FC<Props> = ({ propertySummary }) => {

@@ -1,10 +1,10 @@
-import { Feature } from "@/generated/graphql";
+import { FeatureFragment } from "@/generated/graphql";
 import styles from "./styles.module.scss";
 import { featureTypenameIconMap, getFeatureText } from "./utils";
 import type { MetersFeature } from "./types";
 
 interface Props {
-  propertyFeature: Feature | MetersFeature;
+  propertyFeature: FeatureFragment | MetersFeature;
 }
 
 export const PropertyFeature: React.FC<Props> = ({ propertyFeature }) => {

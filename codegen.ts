@@ -6,6 +6,7 @@ const config: CodegenConfig = {
     "https://sa-east-1.cdn.hygraph.com/content/clzbzosxd01tz07uj6v42ecp4/master",
   require: [],
   documents: "src/services/**/*.gql",
+  ignoreNoDocuments: true,
   generates: {
     "src/generated/graphql.ts": {
       plugins: [
@@ -13,9 +14,6 @@ const config: CodegenConfig = {
         "typescript-operations",
         "typescript-graphql-request",
       ],
-      config: {
-        omitOperationSuffix: true,
-      },
     },
   },
 };
