@@ -2,6 +2,13 @@ import { getAllProperties } from "@/services/properties";
 import { notFound } from "next/navigation";
 import { PropertyCard } from "./_components/PropertyCard";
 import styles from "./styles.module.scss";
+import { Metadata } from "next";
+
+export const revalidate = 3600; // invalidate every hour
+
+export const metadata: Metadata = {
+  title: "Solo Loft - Propiedades",
+};
 
 interface Props {}
 
