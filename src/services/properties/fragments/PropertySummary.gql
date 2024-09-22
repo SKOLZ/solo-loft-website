@@ -1,10 +1,10 @@
 fragment PropertySummary on Property {
-  id
+  slug
   transactionType
   address
   district
   meters
-  features {
+  features(first: 3) {
     ...Feature
   }
   cost
