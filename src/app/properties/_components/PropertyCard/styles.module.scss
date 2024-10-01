@@ -22,25 +22,8 @@
   padding: 0.375rem;
 }
 
-.property-card-transaction-type {
-  font-size: 0.75rem;
-  line-height: 1.125rem;
-  letter-spacing: 2px;
-  padding-inline: 0.25rem;
-  border-radius: 2px;
-  color: var(--white);
-  margin-bottom: 0.375rem;
-  text-transform: uppercase;
-
-  &.sale {
-    border: 1px solid var(--red-1);
-    background-color: oklch(from var(--red-2) l c h / 0.3);
-  }
-
-  &.rent {
-    border: 1px solid var(--blue-1);
-    background-color: oklch(from var(--blue-2) l c h / 0.3);
-  }
+.property-card-type {
+  margin-bottom: .375rem;
 }
 
 .property-card-address {

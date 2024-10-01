@@ -1,0 +1,23 @@
+fragment Property on Property {
+  id
+  transactionType
+  address
+  district
+  meters
+  features(first: 8) {
+    ...Feature
+  }
+  cost
+  costCurrency
+  expenses
+  photos(first: 1) {
+    url
+  }
+  description {
+    raw
+  }
+  location {
+    latitude
+    longitude
+  }
+}

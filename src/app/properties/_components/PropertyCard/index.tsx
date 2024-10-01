@@ -1,13 +1,11 @@
 import Image from "next/image";
 import styles from "./styles.module.scss";
 import { PropertySummaryFragment } from "@/generated/graphql";
-import { PropertyFeature } from "./_components/PropertyFeature";
-import {
-  districtTextMap,
-  transactionTypeClassMap,
-  transactionTypeTextMap,
-} from "./utils";
+import { TransactionTypeTag } from "@/app/_components/TransactionTypeTag";
 import { formatNumber } from "@/utils/formatNumber";
+import Link from "next/link";
+import { PropertyFeatures } from "@/app/_components/PropertyFeatures";
+import { districtTextMap } from "@/utils/districtTextMap";
 
 interface Props {
   propertySummary: PropertySummaryFragment;
@@ -15,7 +13,10 @@ interface Props {
 
 export const PropertyCard: React.FC<Props> = ({ propertySummary }) => {
   return (
-    <div className={styles.propertyCard}>
+    <Link
+      href={`/properties/${propertySummary.slug}`}
+      className={styles.propertyCard}
+    >
       <Image
         className={styles.propertyCardImage}
         src={propertySummary.photos[0].url}
@@ -24,13 +25,10 @@ export const PropertyCard: React.FC<Props> = ({ propertySummary }) => {
         height={234}
       />
       <div className={styles.propertyCardContent}>
-        <p
-          className={`${styles.propertyCardTransactionType} ${
-            transactionTypeClassMap[propertySummary.transactionType]
-          }`}
-        >
-          {transactionTypeTextMap[propertySummary.transactionType]}
-        </p>
+        <TransactionTypeTag
+          transactionType={propertySummary.transactionType}
+          className={styles.propertyCardType}
+        />
         <h2 className={styles.propertyCardAddress}>
           {propertySummary.address}
         </h2>
@@ -40,18 +38,10 @@ export const PropertyCard: React.FC<Props> = ({ propertySummary }) => {
           </p>
         )}
         <div className={styles.propertyCardFeatures}>
-          <PropertyFeature
-            propertyFeature={{
-              __typename: "Meters",
-              amount: propertySummary.meters,
-            }}
+          <PropertyFeatures
+            features={propertySummary.features}
+            meters={propertySummary.meters}
           />
-          {propertySummary.features.slice(0, 3).map((feature) => (
-            <PropertyFeature
-              key={feature.__typename}
-              propertyFeature={feature}
-            />
-          ))}
         </div>
         <h3 className={styles.propertyCardPrice}>
           {propertySummary.costCurrency} {formatNumber(propertySummary.cost)}
@@ -62,6 +52,6 @@ export const PropertyCard: React.FC<Props> = ({ propertySummary }) => {
           </p>
         )}
       </div>
-    </div>
+    </Link>
   );
 };

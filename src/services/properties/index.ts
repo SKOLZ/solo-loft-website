@@ -5,3 +5,8 @@ export const getAllProperties = async () => {
   const response = await getSdk(client).getAllProperties();
   return response.properties;
 };
+
+export const getPropertyDetails = async (slug: string) => {
+  const response = await getSdk(client).getPropertyDetails({ slug });
+  return response.properties[0];
+};
