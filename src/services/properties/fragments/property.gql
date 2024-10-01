@@ -16,4 +16,8 @@ fragment Property on Property {
   description {
     raw
   }
+  location {
+    latitude
+    longitude
+  }
 }

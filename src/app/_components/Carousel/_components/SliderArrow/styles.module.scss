@@ -1,0 +1,37 @@
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  padding: 10px 5px;
+  width: 30px;
+  height: 80px;
+  background: rgba(0,0,0,0.75);
+  border: none;
+
+  &::before {
+    font-family: 'solo-loft';
+    position: absolute;
+    color: var(--white);
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    content: "\ea04";
+  }
+
+  &.left {
+    left: 0;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+
+  &.right {
+    right: 0;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+
+    &::before {
+      transform-origin: 0 0;
+      rotate: 180deg;
+    }
+  }
+}

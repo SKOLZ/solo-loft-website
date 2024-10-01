@@ -11,6 +11,10 @@
 
 .property-photos {
   border-radius: 0.5rem;
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  max-width: 500px;
+  overflow: hidden;
 }
 
 .property-info-wrapper {
@@ -80,10 +84,11 @@
   border-radius: 0.5rem;
   border: 1px solid var(--white);
   background-color: oklch(from var(--white) l c h / 0.12);
+  align-items: center;
 }
 
 .property-description {
-  max-width: 80ch;
+  max-width: 82ch;
   color: var(--white);
 
   h1, h2, h3, h4, h5, h6 {
@@ -102,4 +107,16 @@
     margin-bottom: 0.75rem;
     text-wrap: pretty;
   }
+}
+
+.property-back-link {
+  display: flex;
+  gap: .625rem;
+  text-transform: uppercase;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  letter-spacing: 2px;
+  color: var(--white);
+  align-items: center;
+  margin-bottom: 2.5rem;
 }

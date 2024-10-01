@@ -8,6 +8,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import styles from "./styles.module.scss";
 import { districtTextMap } from "@/utils/districtTextMap";
+import { Carousel } from "@/app/_components/Carousel";
+import { Map } from "./_components/Map";
 
 interface Props {
   params: {
@@ -21,18 +23,24 @@ const PropertyDetailsPage: React.FC<Props> = async ({ params }) => {
   if (!property) {
     return notFound();
   }
+
   return (
     <>
-      <Link href="/properties">Volver al listado</Link>
+      <Link className={styles.propertyBackLink} href="/properties">
+        <i className="ic ic-chevron-left" />
+        Volver al listado
+      </Link>
       <section className={styles.propertyContainer}>
         <div className={styles.propertyInfoContainer}>
-          <Image
-            className={styles.propertyPhotos}
-            width={500}
-            height={375}
-            src={property.photos[0].url}
-            alt=""
-          />
+          <Carousel className={styles.propertyPhotos}>
+            <Image
+              className={styles.propertyPhoto}
+              width={500}
+              height={375}
+              src={property.photos[0].url}
+              alt=""
+            />
+          </Carousel>
           <div className={styles.propertyInfoWrapper}>
             <TransactionTypeTag transactionType={property.transactionType} />
             <h2 className={styles.propertyAddress}>{property.address}</h2>
@@ -60,27 +68,21 @@ const PropertyDetailsPage: React.FC<Props> = async ({ params }) => {
               href={`/contact?propertyId=${property.id}`}
             >
               Contactar
+              <i className="ic ic-envelope" />
             </Link>
           </div>
         </div>
         {property.description && (
           <article className={styles.propertyDescription}>
-            <RichText
-              content={property.description.raw}
-              renderers={{
-                h3: ({ children }) => (
-                  <h3 className={styles.propertyDescriptionTitle}>
-                    {children}
-                  </h3>
-                ),
-                p: ({ children }) => (
-                  <p className={styles.propertyDescriptionText}>{children}</p>
-                ),
-              }}
-            />
+            <RichText content={property.description.raw} />
           </article>
         )}
-        {/* google maps */}
+        {property.location && (
+          <Map
+            lat={property.location.latitude}
+            lng={property.location.longitude}
+          />
+        )}
       </section>
     </>
   );
