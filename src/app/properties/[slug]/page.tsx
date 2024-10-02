@@ -32,7 +32,23 @@ const PropertyDetailsPage: React.FC<Props> = async ({ params }) => {
       </Link>
       <section className={styles.propertyContainer}>
         <div className={styles.propertyInfoContainer}>
-          <Carousel className={styles.propertyPhotos}>
+          {property.photos.length > 1 ? (
+            <Carousel
+              settings={{ arrows: property.photos.length > 1 }}
+              className={styles.propertyPhoto}
+            >
+              {property.photos.map((photo) => (
+                <Image
+                  className={styles.propertyPhoto}
+                  key={photo.url}
+                  width={500}
+                  height={375}
+                  src={photo.url}
+                  alt=""
+                />
+              ))}
+            </Carousel>
+          ) : (
             <Image
               className={styles.propertyPhoto}
               width={500}
@@ -40,7 +56,7 @@ const PropertyDetailsPage: React.FC<Props> = async ({ params }) => {
               src={property.photos[0].url}
               alt=""
             />
-          </Carousel>
+          )}
           <div className={styles.propertyInfoWrapper}>
             <TransactionTypeTag transactionType={property.transactionType} />
             <h2 className={styles.propertyAddress}>{property.address}</h2>

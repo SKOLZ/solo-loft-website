@@ -6,6 +6,7 @@ import { formatNumber } from "@/utils/formatNumber";
 import Link from "next/link";
 import { PropertyFeatures } from "@/app/_components/PropertyFeatures";
 import { districtTextMap } from "@/utils/districtTextMap";
+import { Carousel } from "@/app/_components/Carousel";
 
 interface Props {
   propertySummary: PropertySummaryFragment;
@@ -17,13 +18,32 @@ export const PropertyCard: React.FC<Props> = ({ propertySummary }) => {
       href={`/properties/${propertySummary.slug}`}
       className={styles.propertyCard}
     >
-      <Image
-        className={styles.propertyCardImage}
-        src={propertySummary.photos[0].url}
-        alt="Property"
-        width={308}
-        height={234}
-      />
+      {propertySummary.photos.length > 1 ? (
+        <Carousel
+          arrowVariant="sm"
+          settings={{ arrows: propertySummary.photos.length > 1 }}
+          className={styles.propertyCardImage}
+        >
+          {propertySummary.photos.map((photo) => (
+            <Image
+              className={styles.propertyCardImage}
+              key={photo.url}
+              width={308}
+              height={234}
+              src={photo.url}
+              alt="Property"
+            />
+          ))}
+        </Carousel>
+      ) : (
+        <Image
+          className={styles.propertyCardImage}
+          width={308}
+          height={234}
+          src={propertySummary.photos[0].url}
+          alt="Property"
+        />
+      )}
       <div className={styles.propertyCardContent}>
         <TransactionTypeTag
           transactionType={propertySummary.transactionType}

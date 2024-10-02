@@ -10,7 +10,7 @@ fragment Property on Property {
   cost
   costCurrency
   expenses
-  photos(first: 1) {
+  photos {
     url
   }
   description {

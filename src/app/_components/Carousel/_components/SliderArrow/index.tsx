@@ -3,6 +3,7 @@ import styles from "./styles.module.scss";
 
 interface Props extends CustomArrowProps {
   direction: "left" | "right";
+  variant?: "lg" | "sm";
 }
 
 const directionClassMap = {
@@ -10,10 +11,19 @@ const directionClassMap = {
   right: styles.right,
 };
 
-export const SliderArrow: React.FC<Props> = ({ onClick, direction }) => {
+const variantClassMap = {
+  sm: styles.sm,
+  lg: styles.lg,
+};
+
+export const SliderArrow: React.FC<Props> = ({
+  onClick,
+  direction,
+  variant = "lg",
+}) => {
   return (
     <button
-      className={`${styles.sliderArrow} ${directionClassMap[direction]}`}
+      className={`${styles.sliderArrow} ${directionClassMap[direction]} ${variantClassMap[variant]}`}
       onClick={onClick}
     />
   );

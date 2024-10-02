@@ -3,19 +3,32 @@
   top: 50%;
   transform: translateY(-50%);
   z-index: 1;
-  padding: 10px 5px;
-  width: 30px;
-  height: 80px;
-  background: rgba(0,0,0,0.75);
   border: none;
+  padding: 10px;
+  width: calc(1ch + 20px);
+  background-color: transparent;
+  cursor: pointer;
+
+  &.sm {
+    height: 60px;
+
+    &::before {
+      text-shadow: 0px 0px 2px var(--black);
+    }
+  }
+
+  &.lg {
+    height: 80px;
+    background: rgba(0,0,0,0.75);
+  }
 
   &::before {
     font-family: 'solo-loft';
     position: absolute;
     color: var(--white);
     transform: translate(-50%, -50%);
-    font-size: 24px;
     content: "\ea04";
+    font-size: 24px;
   }
 
   &.left {
