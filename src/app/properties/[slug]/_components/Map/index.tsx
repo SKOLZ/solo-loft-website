@@ -17,7 +17,7 @@ export const Map: React.FC<Props> = ({ lat, lng }) => {
   const center = useMemo(() => ({ lat, lng }), [lat, lng]);
 
   return (
-    <APIProvider apiKey={process.env.GOOGLE_MAPS_API_KEY || ""}>
+    <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""}>
       <GoogleMap
         className={style.mapContainer}
         defaultCenter={center}

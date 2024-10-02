@@ -8,7 +8,6 @@ interface Props {}
 
 export const Navbar: React.FC<Props> = () => {
   const pathname = usePathname();
-  console.log(pathname);
   return (
     <nav className={styles.navbar}>
       <NavLink
