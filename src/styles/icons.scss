@@ -23,7 +23,6 @@ $ic-font-path: "../fonts" !default;
   font: normal normal normal 1em/1 'solo-loft';
   color: inherit;
   flex-shrink: 0;
-  font-size: 1.5rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -92,10 +91,12 @@ $icons: (
   'door': 'ea07',
   'envelope': 'ea08',
   'garage': 'ea09',
-  'squared-meters': 'ea0a',
-  'sun': 'ea0b',
-  'toilet': 'ea0c',
-  'window': 'ea0d',
+  'location': 'ea0a',
+  'phone': 'ea0b',
+  'squared-meters': 'ea0c',
+  'sun': 'ea0d',
+  'toilet': 'ea0e',
+  'window': 'ea0f',
 );
 
 @function unicode($str) {

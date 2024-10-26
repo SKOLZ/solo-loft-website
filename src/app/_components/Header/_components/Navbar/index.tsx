@@ -17,13 +17,13 @@ export const Navbar: React.FC<Props> = () => {
       >
         Propiedades
       </NavLink>
-      {/* <NavLink
+      <NavLink
         className={styles.navbarItem}
         activeClassName={styles.active}
         href="/contact"
       >
         Contacto
-      </NavLink> */}
+      </NavLink>
     </nav>
   );
 };
