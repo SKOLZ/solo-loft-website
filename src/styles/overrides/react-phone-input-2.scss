@@ -1,0 +1,28 @@
+.react-tel-input .selected-flag:hover,
+.react-tel-input .selected-flag:focus {
+  background: var(--gray-2);
+  border-radius: 4px;
+}
+
+.react-tel-input .flag-dropdown.open .selected-flag,
+.react-tel-input .flag-dropdown.open {
+  background: var(--gray-2);
+  border-radius: 4px;
+}
+
+.react-tel-input .flag-dropdown .selected-flag {
+  padding-inline: 0;
+  cursor: default;
+  width: 42px;
+  display: flex;
+  justify-content: center;
+}
+
+.react-tel-input .country-list .country.highlight,
+.react-tel-input .country-list .country:hover {
+  background-color: var(--gray-1);
+}
+
+.form-control.open {
+  outline: 2px solid var(--gray-2);
+}

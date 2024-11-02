@@ -1,31 +1,37 @@
 import { getAllPropertyIdentifiers } from "@/services/properties";
 import { ContactForm } from "./_components/ContactForm";
+import styles from "./styles.module.scss";
 
-interface Props {}
+interface Props {
+  searchParams?: { [key: string]: string | undefined };
+}
 
-const ContactPage: React.FC<Props> = async () => {
+const ContactPage: React.FC<Props> = async ({ searchParams }) => {
   const propertyIdentifiers = await getAllPropertyIdentifiers();
-
+  const initialPropertyId = searchParams?.propertyId;
   return (
-    <section>
-      <div>
-        <h1>Contact</h1>
-        <ul>
-          <li>
+    <section className={styles.contactContainer}>
+      <div className={styles.contactInfoContainer}>
+        <h1 className={styles.title}>Contacto</h1>
+        <ul className={styles.contactInfoFields}>
+          <li className={styles.contactInfoField}>
             <i className="ic ic-envelope" />
-            email@gmail.com
+            solo-loft@gmail.com
           </li>
-          <li>
+          <li className={styles.contactInfoField}>
             <i className="ic ic-phone" />
-            1234-5678
+            4713-2567
           </li>
-          <li>
+          <li className={styles.contactInfoField}>
             <i className=" ic ic-location" />
             Dorrego 1940, Cap. Fed.
           </li>
         </ul>
       </div>
-      <ContactForm propertyIdentifiers={propertyIdentifiers} />
+      <ContactForm
+        propertyIdentifiers={propertyIdentifiers}
+        initialPropertyId={initialPropertyId}
+      />
     </section>
   );
 };
