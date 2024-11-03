@@ -30,7 +30,6 @@ export default function RootLayout({
         <Footer />
         <Toaster
           toastOptions={{
-            duration: 99999999,
             style: {
               background: "#111",
               border: "1px solid #222",
