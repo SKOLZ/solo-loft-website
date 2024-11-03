@@ -42,7 +42,6 @@ export const ContactForm: React.FC<Props> = ({
     formState: { errors },
     reset,
     control,
-    getValues,
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
     defaultValues,
@@ -137,12 +136,16 @@ export const ContactForm: React.FC<Props> = ({
         )}
       </div>
       <GoogleReCaptchaProvider
-        reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+        reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
       >
         <GoogleReCaptcha onVerify={handleCaptchaChange} />
       </GoogleReCaptchaProvider>
-      <button type="submit" className={styles.contactButton}>
-        {isLoading ? "enviando" : "Contactar"}
+      <button
+        type="submit"
+        className={styles.contactButton}
+        disabled={isLoading}
+      >
+        {isLoading ? <div className={styles.loader} /> : "Contactar"}
       </button>
       <p className={styles.captchaNotice}>
         This site is protected by reCAPTCHA and the Google{" "}

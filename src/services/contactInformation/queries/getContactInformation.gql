@@ -1,0 +1,5 @@
+query getContactInformation {
+  contactInformations(first: 1) {
+    ...contactInformation
+  }
+}

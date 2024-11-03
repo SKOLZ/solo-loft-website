@@ -61,6 +61,13 @@
   cursor: pointer;
   transition: background-color 0.2s;
   margin-block: 8px;
+  display: flex;
+  justify-content: center;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
 .captcha-notice {
@@ -103,3 +110,20 @@
   }
 }
 
+.loader {
+  width: 24px;
+  padding: 4px;
+  margin-block: 3px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--gray-5);
+  --_m:
+    conic-gradient(#0000 10%,#000),
+    linear-gradient(#000 0 0) content-box;
+  -webkit-mask: var(--_m);
+          mask: var(--_m);
+  -webkit-mask-composite: source-out;
+          mask-composite: subtract;
+  animation: spin 1.5s infinite linear;
+}
+@keyframes spin {to{transform: rotate(1turn)}}

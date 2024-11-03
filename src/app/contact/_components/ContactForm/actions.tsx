@@ -11,27 +11,17 @@ interface SendEmailProps {
 
 export const sendEmail = async ({ formData, captchaToken }: SendEmailProps) => {
   try {
-    // const response = await fetch(
-    //   "https://public.herotofu.com/v1/7771bcf0-8336-11ef-b2ee-7bc0ee20cd9b",
-    //   {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       ...formData,
-    //       "g-recaptcha-response": captchaToken,
-    //     }),
-    //   }
-    // );
-    const response = {
-      ok: true,
-      json: async () => {
-        return {
-          message: "Success",
-        };
+    const response = await fetch(process.env.HEROTOFU_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-    };
+      body: JSON.stringify({
+        ...formData,
+        "g-recaptcha-response": captchaToken,
+      }),
+    });
+
     return {
       ok: response.ok,
       error: response.ok ? null : await response.json(),

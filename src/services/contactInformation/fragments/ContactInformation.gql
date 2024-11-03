@@ -1,0 +1,5 @@
+fragment contactInformation on ContactInformation {
+  email
+  phone
+  address
+}
