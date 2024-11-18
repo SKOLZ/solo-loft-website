@@ -10,6 +10,8 @@ export async function POST(request: NextRequest) {
       revalidatePath(`/properties/${publishedPage.data.slug}`);
     case "ContactInformation":
       revalidatePath("/contact");
+    case "AboutUs":
+      revalidatePath("/about-us");
   }
   return Response.json({ revalidated: true, now: Date.now() });
 }
