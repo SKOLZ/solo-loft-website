@@ -32,3 +32,10 @@
     max-width: 65ch;
   }
 }
+
+.about-description-image {
+  height: 300px;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  margin-block-end: 40px;
+}
