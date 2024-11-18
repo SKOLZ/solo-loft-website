@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
   switch (publishedPage.data.__typename) {
     case "Property":
       revalidatePath("/properties");
-      revalidatePath(`/properties/${publishedPage.data.url}`);
+      revalidatePath(`/properties/${publishedPage.data.slug}`);
     case "ContactInformation":
       revalidatePath("/contact");
   }
