@@ -1,0 +1,5 @@
+fragment aboutUs on AboutUs {
+  description {
+    raw
+  }
+}

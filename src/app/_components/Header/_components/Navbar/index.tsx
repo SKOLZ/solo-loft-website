@@ -20,6 +20,13 @@ export const Navbar: React.FC<Props> = () => {
       <NavLink
         className={styles.navbarItem}
         activeClassName={styles.active}
+        href="/about-us"
+      >
+        Nosotros
+      </NavLink>
+      <NavLink
+        className={styles.navbarItem}
+        activeClassName={styles.active}
         href="/contact"
       >
         Contacto

@@ -18,6 +18,11 @@ export const Footer: React.FC<Props> = () => {
               </Link>
             </li>
             <li>
+              <Link href="/about-us" className="link">
+                Nosotros
+              </Link>
+            </li>
+            <li>
               <Link href="/contact" className="link">
                 Contacto
               </Link>

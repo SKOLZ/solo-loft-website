@@ -20,11 +20,11 @@ const Properties: React.FC<Props> = async () => {
   }
 
   return (
-    <div className={styles.propertiesWrapper}>
+    <section className={styles.propertiesWrapper}>
       {properties.map((property) => (
         <PropertyCard key={property.slug} propertySummary={property} />
       ))}
-    </div>
+    </section>
   );
 };
 
