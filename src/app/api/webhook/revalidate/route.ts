@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
 
   // if (publishedPage.data.url) {
   // revalidatePath(publishedPage.data.url);
-  revalidatePath("/properties/*");
+  revalidatePath("/properties/[slug]");
   return Response.json({ revalidated: true, now: Date.now() });
   // }
 
