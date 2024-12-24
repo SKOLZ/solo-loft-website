@@ -1,3 +1,0 @@
-fragment Garage on Garage {
-  amount
-}

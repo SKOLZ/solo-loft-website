@@ -1,3 +1,0 @@
-fragment Toilet on Toilet {
-  amount
-}

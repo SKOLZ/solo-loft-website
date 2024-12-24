@@ -7,16 +7,17 @@ interface Props {
 }
 
 export const PropertyFeatures: React.FC<Props> = ({ features, meters }) => {
+  console.log("features", features);
   return (
     <>
       <PropertyFeature
         propertyFeature={{
-          __typename: "Meters",
+          type: "meters",
           amount: meters,
         }}
       />
       {features.map((feature) => (
-        <PropertyFeature key={feature.__typename} propertyFeature={feature} />
+        <PropertyFeature key={feature.type} propertyFeature={feature} />
       ))}
     </>
   );

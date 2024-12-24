@@ -1,4 +1,4 @@
 export type MetersFeature = {
-  __typename: "Meters";
+  type: "meters";
   amount: number;
 };

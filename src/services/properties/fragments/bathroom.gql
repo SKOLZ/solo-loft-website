@@ -1,3 +1,0 @@
-fragment Bathroom on Bathroom {
-  amount
-}

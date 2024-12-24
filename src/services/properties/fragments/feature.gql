@@ -1,12 +1,6 @@
-fragment Feature on PropertyfeaturesUnion {
-  __typename
-  ...CoveredMeter
-  ...Bedroom
-  ...Room
-  ...Bathroom
-  ...Garage
-  ...BuildingAge
-  ...Orientation
-  ...Toilet
-  ...Luminosity
+fragment Feature on PropertyFeature {
+  type
+  amount
+  luminosityLevel
+  orientation
 }

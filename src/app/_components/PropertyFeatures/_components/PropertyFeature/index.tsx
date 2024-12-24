@@ -12,7 +12,7 @@ export const PropertyFeature: React.FC<Props> = ({ propertyFeature }) => {
     <div className={styles.feature}>
       <i
         className={`${styles.featureIcon} ic ${
-          featureTypenameIconMap[propertyFeature.__typename]
+          featureTypenameIconMap[propertyFeature.type]
         }`}
       />
       <p className={styles.featureLabel}>{getFeatureText(propertyFeature)}</p>

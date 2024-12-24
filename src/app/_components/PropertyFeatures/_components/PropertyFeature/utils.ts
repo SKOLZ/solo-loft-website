@@ -7,19 +7,19 @@ import { pluralizeString } from "@/utils/pluralizeString";
 import type { MetersFeature } from "./types";
 
 export const featureTypenameIconMap: Record<
-  FeatureFragment["__typename"] | MetersFeature["__typename"],
+  FeatureFragment["type"] | MetersFeature["type"],
   string
 > = {
-  Bathroom: "ic-bathroom",
-  Bedroom: "ic-bed",
-  BuildingAge: "ic-calendar",
-  CoveredMeter: "ic-covered-meters",
-  Garage: "ic-garage",
-  Luminosity: "ic-luminosity",
+  bathrooms: "ic-bathroom",
+  bedrooms: "ic-bed",
+  buildingAge: "ic-calendar",
+  coveredMeters: "ic-covered-meters",
+  garages: "ic-garage",
+  luminosity: "ic-luminosity",
   Orientation: "ic-window",
-  Room: "ic-door",
-  Toilet: "ic-toilet",
-  Meters: "ic-squared-meters",
+  rooms: "ic-door",
+  toilets: "ic-toilet",
+  meters: "ic-squared-meters",
 };
 
 const orientationMap: Record<Orientations, string> = {
@@ -35,26 +35,26 @@ const luminosityLevelMap: Record<LuminousStages, string> = {
 };
 
 export const getFeatureText = (feature: FeatureFragment | MetersFeature) => {
-  switch (feature.__typename) {
-    case "Meters":
+  switch (feature.type) {
+    case "meters":
       return `${feature.amount} m²`;
-    case "Bathroom":
+    case "bathrooms":
       return `${feature.amount} ${pluralizeString(feature.amount, "Baño")}`;
-    case "Bedroom":
+    case "bedrooms":
       return `${feature.amount} Dorm.`;
-    case "BuildingAge":
-      return `${feature.years} ${pluralizeString(feature.years, "Año")}`;
-    case "CoveredMeter":
+    case "buildingAge":
+      return `${feature.amount} ${pluralizeString(feature.amount, "Año")}`;
+    case "coveredMeters":
       return `${feature.amount} m² Cub.`;
-    case "Garage":
+    case "garages":
       return `${feature.amount} Coch.`;
-    case "Luminosity":
-      return luminosityLevelMap[feature.level];
-    case "Orientation":
+    case "luminosity":
+      return luminosityLevelMap[feature.luminosityLevel];
+    case "orientation":
       return orientationMap[feature.orientation];
-    case "Room":
+    case "rooms":
       return `${feature.amount} Amb.`;
-    case "Toilet":
+    case "toilets":
       return `${feature.amount} ${pluralizeString(feature.amount, "Toilette")}`;
   }
 };
