@@ -3,5 +3,5 @@ export const pluralizeString = (
   word: string,
   pluralSuffix = "s"
 ) => {
-  return `${word}${amount > 1 ? pluralSuffix : ""}`;
+  return `${word}${amount === 1 ? "" : pluralSuffix}`;
 };

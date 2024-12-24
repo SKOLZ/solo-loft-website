@@ -16,7 +16,7 @@ export const featureTypenameIconMap: Record<
   coveredMeters: "ic-covered-meters",
   garages: "ic-garage",
   luminosity: "ic-luminosity",
-  Orientation: "ic-window",
+  orientation: "ic-window",
   rooms: "ic-door",
   toilets: "ic-toilet",
   meters: "ic-squared-meters",
@@ -39,22 +39,28 @@ export const getFeatureText = (feature: FeatureFragment | MetersFeature) => {
     case "meters":
       return `${feature.amount} m²`;
     case "bathrooms":
-      return `${feature.amount} ${pluralizeString(feature.amount, "Baño")}`;
+      return `${feature.amount} ${pluralizeString(
+        feature.amount || 0,
+        "Baño"
+      )}`;
     case "bedrooms":
       return `${feature.amount} Dorm.`;
     case "buildingAge":
-      return `${feature.amount} ${pluralizeString(feature.amount, "Año")}`;
+      return `${feature.amount} ${pluralizeString(feature.amount || 0, "Año")}`;
     case "coveredMeters":
       return `${feature.amount} m² Cub.`;
     case "garages":
       return `${feature.amount} Coch.`;
     case "luminosity":
-      return luminosityLevelMap[feature.luminosityLevel];
+      return luminosityLevelMap[feature.luminosityLevel!] || "";
     case "orientation":
-      return orientationMap[feature.orientation];
+      return orientationMap[feature.orientation!] || "";
     case "rooms":
       return `${feature.amount} Amb.`;
     case "toilets":
-      return `${feature.amount} ${pluralizeString(feature.amount, "Toilette")}`;
+      return `${feature.amount} ${pluralizeString(
+        feature.amount || 0,
+        "Toilette"
+      )}`;
   }
 };

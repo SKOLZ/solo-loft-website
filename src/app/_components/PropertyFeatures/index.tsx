@@ -7,7 +7,6 @@ interface Props {
 }
 
 export const PropertyFeatures: React.FC<Props> = ({ features, meters }) => {
-  console.log("features", features);
   return (
     <>
       <PropertyFeature

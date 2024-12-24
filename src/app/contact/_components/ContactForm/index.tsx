@@ -48,7 +48,6 @@ export const ContactForm: React.FC<Props> = ({
   });
 
   const onSubmit = async (formData: ContactFormData) => {
-    console.log("submitting", formData);
     setisLoading(true);
     const response = await sendEmail({ formData, captchaToken });
     setisLoading(false);
