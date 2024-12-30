@@ -15,7 +15,7 @@ export const featureTypenameIconMap: Record<
   buildingAge: "ic-calendar",
   coveredMeters: "ic-covered-meters",
   garages: "ic-garage",
-  luminosity: "ic-luminosity",
+  luminosity: "ic-sun",
   orientation: "ic-window",
   rooms: "ic-door",
   toilets: "ic-toilet",

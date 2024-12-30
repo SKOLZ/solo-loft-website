@@ -21,7 +21,10 @@ export const PropertyCard: React.FC<Props> = ({ propertySummary }) => {
       {propertySummary.photos.length > 1 ? (
         <Carousel
           arrowVariant="sm"
-          settings={{ arrows: propertySummary.photos.length > 1 }}
+          settings={{
+            arrows: propertySummary.photos.length > 1,
+            autoplay: false,
+          }}
           className={styles.propertyCardImage}
         >
           {propertySummary.photos.map((photo) => (
