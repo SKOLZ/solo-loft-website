@@ -10,6 +10,7 @@ import styles from "./styles.module.scss";
 import { districtTextMap } from "@/utils/districtTextMap";
 import { Carousel } from "@/app/_components/Carousel";
 import { Map } from "./_components/Map";
+import { PropertyAssetsViewer } from "./_components/PropertyAssetsViewer";
 
 interface Props {
   params: {
@@ -32,31 +33,10 @@ const PropertyDetailsPage: React.FC<Props> = async ({ params }) => {
       </Link>
       <section className={styles.propertyContainer}>
         <div className={styles.propertyInfoContainer}>
-          {property.photos.length > 1 ? (
-            <Carousel
-              settings={{ arrows: property.photos.length > 1 }}
-              className={styles.propertyPhoto}
-            >
-              {property.photos.map((photo) => (
-                <Image
-                  className={styles.propertyPhoto}
-                  key={photo.url}
-                  width={500}
-                  height={375}
-                  src={photo.url}
-                  alt=""
-                />
-              ))}
-            </Carousel>
-          ) : (
-            <Image
-              className={styles.propertyPhoto}
-              width={500}
-              height={375}
-              src={property.photos[0].url}
-              alt=""
-            />
-          )}
+          <PropertyAssetsViewer
+            photos={property.photos}
+            videos={property.videos}
+          />
           <div className={styles.propertyInfoWrapper}>
             <TransactionTypeTag transactionType={property.transactionType} />
             <h2 className={styles.propertyAddress}>{property.address}</h2>

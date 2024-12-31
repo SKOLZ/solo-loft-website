@@ -20,6 +20,17 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
+
+button {
+  border: none;
+  cursor: pointer;
+  background: none;
+}
+
+iframe {
+  border: none;
+}
+
 /*
   5. Improve media defaults
 */
