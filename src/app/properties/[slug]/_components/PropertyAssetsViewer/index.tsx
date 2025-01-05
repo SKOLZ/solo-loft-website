@@ -7,6 +7,9 @@ import { AssetCarousel } from "./_components/AssetCarousel";
 import styles from "./styles.module.scss";
 import { getYouTubeVideoId } from "@/utils/getYouTuveVideoId";
 import { YoutubeEmbed } from "@/app/_components/YouTubeEmbed";
+import ReactModal from "react-modal";
+
+ReactModal.setAppElement("#root");
 
 type NonEmptyArray<T> = [T, ...T[]];
 
@@ -36,23 +39,49 @@ export const PropertyAssetsViewer: React.FC<Props> = ({ photos, videos }) => {
   const [activeAssetType, setActiveAssetType] = useState<AssetType>(
     ASSET_TYPES.photos
   );
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = (event: React.MouseEvent<HTMLButtonElement>) => {
+    // event.preventDefault();
+    // event.stopPropagation();
+    setIsModalOpen(!isModalOpen);
+  };
+
   return (
     <div className={styles.assetViewerContainer}>
+      <ReactModal
+        isOpen={isModalOpen}
+        shouldCloseOnEsc={true}
+        shouldCloseOnOverlayClick={true}
+        onRequestClose={() => setIsModalOpen(false)}
+      >
+        <h2>Hello</h2>
+        <button onClick={() => setIsModalOpen(false)}>close</button>
+        <div>I am a modal</div>
+        <form>
+          <input />
+          <button>tab navigation</button>
+          <button>stays</button>
+          <button>inside</button>
+          <button>the modal</button>
+        </form>
+      </ReactModal>
       {activeAssetType === ASSET_TYPES.photos && (
         <AssetCarousel
           isSingle={isSinglePhotoAsset({ photos, videos })}
           elements={photos}
         >
           {(photo, index) => (
-            <Image
-              className={styles.propertyPhoto}
-              key={photo.url}
-              width={500}
-              height={375}
-              src={photo.url}
-              priority={index === 0}
-              alt=""
-            />
+            <button onClick={openModal}>
+              <Image
+                className={styles.propertyPhoto}
+                key={photo.url}
+                width={500}
+                height={375}
+                src={photo.url}
+                priority={index === 0}
+                alt=""
+              />
+            </button>
           )}
         </AssetCarousel>
       )}
@@ -62,12 +91,14 @@ export const PropertyAssetsViewer: React.FC<Props> = ({ photos, videos }) => {
           elements={videos}
         >
           {(video) => (
-            <YoutubeEmbed
-              width={500}
-              height={375}
-              className={styles.propertyVideo}
-              embedId={getYouTubeVideoId(video.url || "") ?? ""}
-            />
+            <button onClick={openModal}>
+              <YoutubeEmbed
+                width={500}
+                height={375}
+                className={styles.propertyVideo}
+                embedId={getYouTubeVideoId(video.url || "") ?? ""}
+              />
+            </button>
           )}
         </AssetCarousel>
       )}
