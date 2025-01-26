@@ -29,6 +29,7 @@ export const PropertyAssetsViewer: React.FC<Props> = ({ photos, videos }) => {
   const sliderRef = useRef<Slider>(null);
 
   const openModal = () => {
+    modalSliderRef.current?.slickGoTo(currentPhotoIndex, true);
     setIsModalOpen(true);
   };
 
@@ -41,8 +42,17 @@ export const PropertyAssetsViewer: React.FC<Props> = ({ photos, videos }) => {
     setCurrentPhotoIndex(index);
   };
 
+  const onInitCarousel = () => {
+    sliderRef.current?.slickGoTo(currentPhotoIndex, true);
+  };
+
   const onInitModalCarousel = () => {
     modalSliderRef.current?.slickGoTo(currentPhotoIndex, true);
+  };
+
+  const onSetPhotosAsActive = () => {
+    setActiveAssetType(ASSET_TYPES.photos);
+    sliderRef.current?.slickGoTo(currentPhotoIndex, true);
   };
 
   return (
@@ -62,6 +72,7 @@ export const PropertyAssetsViewer: React.FC<Props> = ({ photos, videos }) => {
           className={styles.propertyPhotos}
           sliderRef={sliderRef}
           settings={{
+            onInit: onInitCarousel,
             beforeChange: onSlideChange,
           }}
         >
@@ -99,7 +110,7 @@ export const PropertyAssetsViewer: React.FC<Props> = ({ photos, videos }) => {
         <>
           <button
             className={`${styles.assetViewerTypeSwitcher} ${styles.photos}`}
-            onClick={() => setActiveAssetType(ASSET_TYPES.photos)}
+            onClick={onSetPhotosAsActive}
           >
             <i className="ic ic-photo" />
           </button>
