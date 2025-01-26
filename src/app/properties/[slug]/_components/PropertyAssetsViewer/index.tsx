@@ -10,27 +10,9 @@ import { YoutubeEmbed } from "@/app/_components/YouTubeEmbed";
 import ReactModal from "react-modal";
 import "@/styles/overrides/react-modal.scss";
 import Slider from "react-slick";
+import { AssetModal } from "./_components/AssetModal";
 
 ReactModal.setAppElement("#root");
-
-type NonEmptyArray<T> = [T, ...T[]];
-
-type PhotoAssetProps = {
-  photos: NonEmptyArray<PropertyFragment["photos"][number]>;
-  videos: PropertyFragment["videos"];
-};
-type VideoAssetProps = {
-  photos: PropertyFragment["photos"];
-  videos: NonEmptyArray<PropertyFragment["videos"][number]>;
-};
-
-function isSinglePhotoAsset(assetProps: Props): assetProps is PhotoAssetProps {
-  return assetProps.photos.length === 1;
-}
-
-function isSingleVideoAsset(assetProps: Props): assetProps is VideoAssetProps {
-  return assetProps.videos.length === 1;
-}
 
 interface Props {
   photos: PropertyFragment["photos"];
@@ -65,52 +47,17 @@ export const PropertyAssetsViewer: React.FC<Props> = ({ photos, videos }) => {
 
   return (
     <div className={styles.assetViewerContainer}>
-      <ReactModal
-        isOpen={isModalOpen}
-        shouldCloseOnEsc={true}
-        shouldCloseOnOverlayClick={true}
-        onRequestClose={closeModal}
-        overlayClassName={styles.modalOverlay}
-        className={styles.modalContent}
-      >
-        <>
-          <button
-            className={styles.modalCloseButton}
-            onClick={closeModal}
-            aria-label="Close"
-          >
-            <i className="ic ic-X" />
-          </button>
-          <AssetCarousel
-            isSingle={isSinglePhotoAsset({ photos, videos })}
-            elements={photos}
-            className={styles.modalCarousel}
-            arrowClassName={styles.modalCarouselArrow}
-            arrowVariant="full"
-            sliderRef={modalSliderRef}
-            settings={{
-              onInit: onInitModalCarousel,
-              beforeChange: onSlideChange,
-            }}
-          >
-            {(photo, index) => (
-              <div key={photo.url}>
-                <Image
-                  className={styles.modalCarouselItem}
-                  width={photo.width || 500}
-                  height={photo.height || 375}
-                  src={photo.url}
-                  priority={index === 0}
-                  alt=""
-                />
-              </div>
-            )}
-          </AssetCarousel>
-        </>
-      </ReactModal>
+      <AssetModal
+        isModalOpen={isModalOpen}
+        closeModal={closeModal}
+        photos={photos}
+        modalSliderRef={modalSliderRef}
+        onInitModalCarousel={onInitModalCarousel}
+        onSlideChange={onSlideChange}
+      />
       {activeAssetType === ASSET_TYPES.photos && (
         <AssetCarousel
-          isSingle={isSinglePhotoAsset({ photos, videos })}
+          isSingle={photos.length === 1}
           elements={photos}
           className={styles.propertyPhotos}
           sliderRef={sliderRef}
@@ -137,10 +84,7 @@ export const PropertyAssetsViewer: React.FC<Props> = ({ photos, videos }) => {
         </AssetCarousel>
       )}
       {activeAssetType === ASSET_TYPES.videos && (
-        <AssetCarousel
-          isSingle={isSingleVideoAsset({ photos, videos })}
-          elements={videos}
-        >
+        <AssetCarousel isSingle={videos.length === 1} elements={videos}>
           {(video) => (
             <YoutubeEmbed
               width={500}
