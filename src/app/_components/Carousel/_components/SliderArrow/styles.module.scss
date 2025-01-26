@@ -22,12 +22,18 @@
     background: rgba(0,0,0,0.75);
   }
 
+  &.full {
+    height: 100%;
+    width: calc(1ch + 80px);
+    padding: 40px;
+  }
+
   &::before {
     font-family: 'solo-loft';
     position: absolute;
     color: var(--white);
     transform: translate(-50%, -50%);
-    content: "\ea04";
+    content: "\ea05";
     font-size: 24px;
   }
 

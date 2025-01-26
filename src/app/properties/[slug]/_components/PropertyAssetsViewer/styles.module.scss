@@ -1,3 +1,7 @@
+.property-photo-wrapper {
+  font-size: 0;
+}
+
 .property-photo,
 .property-video {
   border-radius: 0.5rem;
@@ -45,4 +49,57 @@
     left: 50%;
     transform: translateX(0.375rem);
   }
+}
+
+.modal-carousel {
+  border-radius: 0.5rem;
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.modal-carousel-item {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  object-fit: contain;
+  margin: 0 auto;
+  pointer-events: auto;
+}
+
+.modal-overlay {
+  background: oklch(from var(--black) l c h / 0.9);;
+  position: fixed;
+  inset: 0;
+}
+
+.modal-content {
+  background: transparent;
+  position: absolute;
+  inset: 0px;
+  overflow: auto;
+  outline: none;
+  padding: 20px;
+  pointer-events: none;
+}
+
+.modal-close-button {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  cursor: pointer;
+  font-size: 24px;
+  color: var(--white);
+  z-index: 2;
+  pointer-events: auto;
+}
+
+.modal-carousel-arrow {
+  pointer-events: auto;
+  padding: 40px;
+  height: 100%;
 }

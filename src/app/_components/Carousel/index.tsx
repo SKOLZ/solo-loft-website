@@ -3,11 +3,15 @@
 import { PropsWithChildren } from "react";
 import Slider, { Settings } from "react-slick";
 import { SliderArrow } from "./_components/SliderArrow";
+import "@/styles/overrides/slick-slider.scss";
+import { SliderArrowVariant } from "./_components/SliderArrow/types";
 
 interface CarouselProps extends PropsWithChildren {
   className?: string;
   settings?: Settings;
-  arrowVariant?: "lg" | "sm";
+  arrowVariant?: SliderArrowVariant;
+  arrowClassName?: string;
+  sliderRef?: React.RefObject<Slider>;
 }
 
 export const Carousel: React.FC<CarouselProps> = ({
@@ -15,17 +19,35 @@ export const Carousel: React.FC<CarouselProps> = ({
   className,
   arrowVariant = "lg",
   settings,
+  arrowClassName,
+  sliderRef,
 }) => {
   const finalSettings: Settings = {
     dots: false,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 5000,
     lazyLoad: "progressive",
     className,
-    prevArrow: <SliderArrow direction="left" variant={arrowVariant} />,
-    nextArrow: <SliderArrow direction="right" variant={arrowVariant} />,
+    prevArrow: (
+      <SliderArrow
+        direction="left"
+        variant={arrowVariant}
+        arrowClassName={arrowClassName}
+      />
+    ),
+    nextArrow: (
+      <SliderArrow
+        direction="right"
+        variant={arrowVariant}
+        arrowClassName={arrowClassName}
+      />
+    ),
     ...settings,
   };
 
-  return <Slider {...finalSettings}>{children}</Slider>;
+  return (
+    <Slider {...finalSettings} ref={sliderRef}>
+      {children}
+    </Slider>
+  );
 };
