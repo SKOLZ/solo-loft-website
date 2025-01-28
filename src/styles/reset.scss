@@ -11,6 +11,16 @@
   margin: 0;
   padding: 0;
 }
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  appearance: none;
+}
 /*
   Typographic tweaks!
   3. Add accessible line-height

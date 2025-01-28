@@ -1,31 +1,16 @@
 "use client";
 import { PropertyFragment } from "@/generated/graphql";
 import { ASSET_TYPES, AssetType } from "./types";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
 import { AssetCarousel } from "./_components/AssetCarousel";
 import styles from "./styles.module.scss";
 import { getYouTubeVideoId } from "@/utils/getYouTuveVideoId";
 import { YoutubeEmbed } from "@/app/_components/YouTubeEmbed";
-
-type NonEmptyArray<T> = [T, ...T[]];
-
-type PhotoAssetProps = {
-  photos: NonEmptyArray<PropertyFragment["photos"][number]>;
-  videos: PropertyFragment["videos"];
-};
-type VideoAssetProps = {
-  photos: PropertyFragment["photos"];
-  videos: NonEmptyArray<PropertyFragment["videos"][number]>;
-};
-
-function isSinglePhotoAsset(assetProps: Props): assetProps is PhotoAssetProps {
-  return assetProps.photos.length === 1;
-}
-
-function isSingleVideoAsset(assetProps: Props): assetProps is VideoAssetProps {
-  return assetProps.videos.length === 1;
-}
+import ReactModal from "react-modal";
+import "@/styles/overrides/react-modal.scss";
+import Slider from "react-slick";
+import { AssetModal } from "./_components/AssetModal";
 
 interface Props {
   photos: PropertyFragment["photos"];
@@ -36,31 +21,71 @@ export const PropertyAssetsViewer: React.FC<Props> = ({ photos, videos }) => {
   const [activeAssetType, setActiveAssetType] = useState<AssetType>(
     ASSET_TYPES.photos
   );
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+  const modalSliderRef = useRef<Slider>(null);
+  const sliderRef = useRef<Slider>(null);
+
+  const openModal = () => {
+    modalSliderRef.current?.slickGoTo(currentPhotoIndex, true);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    sliderRef.current?.slickGoTo(currentPhotoIndex, true);
+    setIsModalOpen(false);
+  };
+
+  const onSlideChange = (_: number, index: number) => {
+    setCurrentPhotoIndex(index);
+  };
+
+  const onSetPhotosAsActive = () => {
+    setActiveAssetType(ASSET_TYPES.photos);
+    sliderRef.current?.slickGoTo(currentPhotoIndex, true);
+  };
+
   return (
     <div className={styles.assetViewerContainer}>
+      <AssetModal
+        isModalOpen={isModalOpen}
+        closeModal={closeModal}
+        photos={photos}
+        modalSliderRef={modalSliderRef}
+        initialSlide={currentPhotoIndex}
+        onSlideChange={onSlideChange}
+      />
       {activeAssetType === ASSET_TYPES.photos && (
         <AssetCarousel
-          isSingle={isSinglePhotoAsset({ photos, videos })}
+          isSingle={photos.length === 1}
           elements={photos}
+          className={styles.propertyPhotos}
+          sliderRef={sliderRef}
+          settings={{
+            initialSlide: currentPhotoIndex,
+            beforeChange: onSlideChange,
+          }}
         >
           {(photo, index) => (
-            <Image
-              className={styles.propertyPhoto}
+            <button
+              onClick={openModal}
               key={photo.url}
-              width={500}
-              height={375}
-              src={photo.url}
-              priority={index === 0}
-              alt=""
-            />
+              className={styles.propertyPhotoWrapper}
+            >
+              <Image
+                className={styles.propertyPhoto}
+                width={500}
+                height={375}
+                src={photo.url}
+                priority={index === 0}
+                alt=""
+              />
+            </button>
           )}
         </AssetCarousel>
       )}
       {activeAssetType === ASSET_TYPES.videos && (
-        <AssetCarousel
-          isSingle={isSingleVideoAsset({ photos, videos })}
-          elements={videos}
-        >
+        <AssetCarousel isSingle={videos.length === 1} elements={videos}>
           {(video) => (
             <YoutubeEmbed
               width={500}
@@ -75,7 +100,7 @@ export const PropertyAssetsViewer: React.FC<Props> = ({ photos, videos }) => {
         <>
           <button
             className={`${styles.assetViewerTypeSwitcher} ${styles.photos}`}
-            onClick={() => setActiveAssetType(ASSET_TYPES.photos)}
+            onClick={onSetPhotosAsActive}
           >
             <i className="ic ic-photo" />
           </button>

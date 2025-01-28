@@ -12,6 +12,8 @@ fragment Property on Property {
   expenses
   photos {
     url
+    width
+    height
   }
   description {
     raw
