@@ -9,7 +9,7 @@ interface Props {
   closeModal: () => void;
   photos: PropertyFragment["photos"];
   modalSliderRef: any;
-  onInitModalCarousel: () => void;
+  initialSlide: number;
   onSlideChange: (oldIndex: number, index: number) => void;
 }
 
@@ -18,7 +18,7 @@ export const AssetModal: React.FC<Props> = ({
   closeModal,
   photos,
   modalSliderRef,
-  onInitModalCarousel,
+  initialSlide,
   onSlideChange,
 }) => {
   return (
@@ -46,7 +46,7 @@ export const AssetModal: React.FC<Props> = ({
           arrowVariant="full"
           sliderRef={modalSliderRef}
           settings={{
-            onInit: onInitModalCarousel,
+            initialSlide: initialSlide,
             beforeChange: onSlideChange,
           }}
         >

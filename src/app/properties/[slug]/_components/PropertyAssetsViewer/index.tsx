@@ -12,8 +12,6 @@ import "@/styles/overrides/react-modal.scss";
 import Slider from "react-slick";
 import { AssetModal } from "./_components/AssetModal";
 
-ReactModal.setAppElement("#root");
-
 interface Props {
   photos: PropertyFragment["photos"];
   videos: PropertyFragment["videos"];
@@ -42,14 +40,6 @@ export const PropertyAssetsViewer: React.FC<Props> = ({ photos, videos }) => {
     setCurrentPhotoIndex(index);
   };
 
-  const onInitCarousel = () => {
-    sliderRef.current?.slickGoTo(currentPhotoIndex, true);
-  };
-
-  const onInitModalCarousel = () => {
-    modalSliderRef.current?.slickGoTo(currentPhotoIndex, true);
-  };
-
   const onSetPhotosAsActive = () => {
     setActiveAssetType(ASSET_TYPES.photos);
     sliderRef.current?.slickGoTo(currentPhotoIndex, true);
@@ -62,7 +52,7 @@ export const PropertyAssetsViewer: React.FC<Props> = ({ photos, videos }) => {
         closeModal={closeModal}
         photos={photos}
         modalSliderRef={modalSliderRef}
-        onInitModalCarousel={onInitModalCarousel}
+        initialSlide={currentPhotoIndex}
         onSlideChange={onSlideChange}
       />
       {activeAssetType === ASSET_TYPES.photos && (
@@ -72,7 +62,7 @@ export const PropertyAssetsViewer: React.FC<Props> = ({ photos, videos }) => {
           className={styles.propertyPhotos}
           sliderRef={sliderRef}
           settings={{
-            onInit: onInitCarousel,
+            initialSlide: currentPhotoIndex,
             beforeChange: onSlideChange,
           }}
         >
