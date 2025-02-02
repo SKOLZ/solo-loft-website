@@ -2,11 +2,9 @@
 
 import { useMemo } from "react";
 import style from "./styles.module.scss";
-import {
-  APIProvider,
-  Map as GoogleMap,
-  Marker,
-} from "@vis.gl/react-google-maps";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import { Icon } from "leaflet";
 
 interface Props {
   lat: number;
@@ -16,17 +14,27 @@ interface Props {
 export const Map: React.FC<Props> = ({ lat, lng }) => {
   const center = useMemo(() => ({ lat, lng }), [lat, lng]);
 
+  const defaultIcon = new Icon({
+    iconUrl:
+      "https://sa-east-1.graphassets.com/clzbzounr059207j00w2u668e/cm6nkvhxp11qc07kkf5d8bny4",
+    iconSize: [27, 36],
+    iconAnchor: [12, 36],
+    popupAnchor: [1, -36],
+    shadowSize: [36, 36],
+  });
+
   return (
-    <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
-      <GoogleMap
-        className={style.mapContainer}
-        defaultCenter={center}
-        defaultZoom={15}
-        disableDefaultUI={true}
-        keyboardShortcuts={false}
-      >
-        <Marker position={center} />
-      </GoogleMap>
-    </APIProvider>
+    <MapContainer
+      center={center}
+      zoom={17}
+      scrollWheelZoom={true}
+      className={style.mapContainer}
+    >
+      <TileLayer
+        attribution=""
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      <Marker icon={defaultIcon} position={center} />
+    </MapContainer>
   );
 };
