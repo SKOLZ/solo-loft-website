@@ -1,7 +1,7 @@
 "use client";
 
 import { PropertyIdentifierFragment } from "@/generated/graphql";
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
@@ -22,7 +22,6 @@ export const ContactForm: React.FC<Props> = ({
   initialPropertyId,
   propertyIdentifiers,
 }) => {
-  const [captchaToken, setCaptchaToken] = useState<string>("");
   const [isLoading, setisLoading] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState<string>("");
   const defaultValues = useMemo(
@@ -49,8 +48,8 @@ export const ContactForm: React.FC<Props> = ({
     setisLoading(true);
     console.log({ turnstileToken });
     const response = await sendEmail({
-      formData: { ...formData, "cf-turnstile-response": turnstileToken },
-      captchaToken,
+      formData,
+      turnstileToken,
     });
     setisLoading(false);
     if (response.ok) {
@@ -60,12 +59,6 @@ export const ContactForm: React.FC<Props> = ({
       toast.error("Hubo un error al enviar el mensaje");
     }
   };
-
-  const handleCaptchaChange = useCallback((token: string | null) => {
-    if (token) {
-      setCaptchaToken(token);
-    }
-  }, []);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.contactForm}>

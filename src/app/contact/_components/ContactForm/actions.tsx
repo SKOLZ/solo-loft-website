@@ -6,12 +6,14 @@ import { json } from "stream/consumers";
 import { headers } from "next/headers";
 
 interface SendEmailProps {
-  formData: ContactFormData & { "cf-turnstile-response": string };
-  captchaToken: string;
+  formData: ContactFormData;
+  turnstileToken: string;
 }
 
-export const sendEmail = async ({ formData, captchaToken }: SendEmailProps) => {
-  const cfTurnstileResponse = formData["cf-turnstile-response"];
+export const sendEmail = async ({
+  formData,
+  turnstileToken,
+}: SendEmailProps) => {
   // If using a reverse proxy, ensure the X-Real-IP header is enabled to accurately capture the client's original IP address.
   const ip = headers().get("x-real-ip");
 
@@ -21,7 +23,7 @@ export const sendEmail = async ({ formData, captchaToken }: SendEmailProps) => {
     "secret",
     process.env.NEXT_PRIVATE_TURNSTILE_SECRET_KEY
   );
-  verifyFormData.append("response", String(cfTurnstileResponse));
+  verifyFormData.append("response", String(turnstileToken));
   verifyFormData.append("remoteip", String(ip));
 
   const url = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
@@ -42,10 +44,7 @@ export const sendEmail = async ({ formData, captchaToken }: SendEmailProps) => {
       };
     }
     try {
-      const response = await sendEmailThroughHerotofu({
-        formData,
-        captchaToken,
-      });
+      const response = await sendEmailThroughHerotofu(formData);
       return response;
     } catch (err) {
       return {
@@ -62,7 +61,7 @@ export const sendEmail = async ({ formData, captchaToken }: SendEmailProps) => {
   }
 };
 
-const sendEmailThroughHerotofu = async ({ formData }: SendEmailProps) => {
+const sendEmailThroughHerotofu = async (formData: ContactFormData) => {
   const url = process.env.HEROTOFU_API_URL;
   const body = new FormData();
   body.append("name", formData.name);
