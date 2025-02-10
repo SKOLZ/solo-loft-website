@@ -1,20 +1,17 @@
 "use client";
 
 import { PropertyIdentifierFragment } from "@/generated/graphql";
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
-import {
-  GoogleReCaptcha,
-  GoogleReCaptchaProvider,
-} from "react-google-recaptcha-v3";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import "@/styles/overrides/react-phone-input-2.scss";
 import styles from "./styles.module.scss";
 import { ContactFormData, contactSchema } from "./types";
 import { sendEmail } from "./actions";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 interface Props {
   initialPropertyId?: string;
@@ -25,8 +22,8 @@ export const ContactForm: React.FC<Props> = ({
   initialPropertyId,
   propertyIdentifiers,
 }) => {
-  const [captchaToken, setCaptchaToken] = useState<string>("");
   const [isLoading, setisLoading] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string>("");
   const defaultValues = useMemo(
     () => ({
       propertyId: initialPropertyId,
@@ -49,7 +46,11 @@ export const ContactForm: React.FC<Props> = ({
 
   const onSubmit = async (formData: ContactFormData) => {
     setisLoading(true);
-    const response = await sendEmail({ formData, captchaToken });
+    console.log({ turnstileToken });
+    const response = await sendEmail({
+      formData,
+      turnstileToken,
+    });
     setisLoading(false);
     if (response.ok) {
       reset(defaultValues);
@@ -58,12 +59,6 @@ export const ContactForm: React.FC<Props> = ({
       toast.error("Hubo un error al enviar el mensaje");
     }
   };
-
-  const handleCaptchaChange = useCallback((token: string | null) => {
-    if (token) {
-      setCaptchaToken(token);
-    }
-  }, []);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.contactForm}>
@@ -134,11 +129,10 @@ export const ContactForm: React.FC<Props> = ({
           <p className={styles.contactError}>{errors.phone.message}</p>
         )}
       </div>
-      <GoogleReCaptchaProvider
-        reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-      >
-        <GoogleReCaptcha onVerify={handleCaptchaChange} />
-      </GoogleReCaptchaProvider>
+      <Turnstile
+        siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+        onSuccess={setTurnstileToken}
+      />
       <button
         type="submit"
         className={styles.contactButton}
@@ -146,23 +140,6 @@ export const ContactForm: React.FC<Props> = ({
       >
         {isLoading ? <div className={styles.loader} /> : "Contactar"}
       </button>
-      <p className={styles.captchaNotice}>
-        This site is protected by reCAPTCHA and the Google{" "}
-        <a
-          className={styles.captchaLink}
-          href="https://policies.google.com/privacy"
-        >
-          Privacy Policy
-        </a>{" "}
-        and{" "}
-        <a
-          className={styles.captchaLink}
-          href="https://policies.google.com/terms"
-        >
-          Terms of Service
-        </a>{" "}
-        apply.
-      </p>
     </form>
   );
 };
