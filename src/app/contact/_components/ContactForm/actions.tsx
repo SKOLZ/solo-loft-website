@@ -42,7 +42,11 @@ export const sendEmail = async ({ formData, captchaToken }: SendEmailProps) => {
       };
     }
     try {
-      await sendEmailThroughHerotofu({ formData, captchaToken });
+      const response = await sendEmailThroughHerotofu({
+        formData,
+        captchaToken,
+      });
+      return response;
     } catch (err) {
       return {
         ok: false,
