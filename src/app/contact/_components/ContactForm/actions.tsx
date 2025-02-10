@@ -36,10 +36,8 @@ export const sendEmail = async ({
     });
 
     const outcome = await result.json();
-    console.log({ outcome });
     if (!outcome.success) {
       // Turnstile failed
-      console.log("Invalid CAPTCHA");
       return {
         ok: false,
         error: "Invalid CAPTCHA",
@@ -49,7 +47,6 @@ export const sendEmail = async ({
       const response = await sendEmailThroughHerotofu(formData);
       return response;
     } catch (err) {
-      console.log("Unable to send email");
       return {
         ok: false,
         error: "Unable to send email",
@@ -57,7 +54,6 @@ export const sendEmail = async ({
     }
   } catch (err) {
     // Request failed
-    console.log("Unable to verify CAPTCHA");
     return {
       ok: false,
       error: "Unable to verify CAPTCHA",
@@ -78,12 +74,11 @@ const sendEmailThroughHerotofu = async (formData: ContactFormData) => {
       body,
       method: "POST",
     });
-    console.log("success");
+
     return {
       ok: response.ok,
     };
   } catch (err) {
-    console.log("Unable to send email");
     return {
       ok: false,
       error: "Unable to send email",
