@@ -10,6 +10,9 @@ export const Navbar: React.FC<Props> = () => {
   const pathname = usePathname();
   return (
     <nav className={styles.navbar}>
+      <div className={styles.hamburger}>
+        <input type="checkbox" className={styles.hamburgerCheckbox} />
+      </div>
       <NavLink
         className={styles.navbarItem}
         activeClassName={styles.active}
