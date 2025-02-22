@@ -39,7 +39,7 @@
     background-color: var(--white);
     border-radius: 0.125rem;
     position: absolute;
-    transition: scale 0.3s ease;
+    transition: scale 0.3s ease, rotate 0.5s ease;;
     will-change: scale;
     transform: translateZ(0);
     pointer-events: none;
@@ -47,10 +47,12 @@
 
   &::before {
     top: calc(50% - 3px - 0.25rem);
+    transform-origin: 0 50%;
   }
 
   &::after {
     top: calc(50% + 0.25rem);
+    transform-origin: 0 50%;
   }
 
   &:hover::before {
@@ -70,6 +72,10 @@
 }
 
 @media screen and (max-width: 768px) {
+  :global(.body):has(.navbar .hamburger-checkbox:checked) {
+    overflow: hidden;
+  }
+
   :global(.container):has(> .navbar .hamburger-checkbox:checked) {
     padding-top: calc(2.5rem + 3.5rem);
   }
@@ -94,6 +100,16 @@
   
   .hamburger:has(.hamburger-checkbox:checked) {
     margin-bottom: auto;
+
+    &::before {
+      rotate: 30deg;
+      scale: 1.12 1;
+    }
+
+    &::after {
+      rotate: -30deg;
+      scale: 1.12 1;
+    }
   }
 
   .navbar-item {
@@ -119,5 +135,4 @@
   .hamburger {
     display: none;
   }
-  
 }

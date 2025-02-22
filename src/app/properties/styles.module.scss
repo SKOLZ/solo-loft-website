@@ -1,5 +1,8 @@
 .properties-wrapper {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 20rem);
+  width: 100%;
+  max-width: 1280px;
+  place-content: center;
   gap: 2.5rem;
 }

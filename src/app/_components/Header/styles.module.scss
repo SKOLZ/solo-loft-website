@@ -31,3 +31,9 @@
   align-items: center;
   padding-block: 2.5rem;
 }
+
+@media screen and (max-width: 768px) {
+  .header::after {
+    right: calc(1.25rem - 10px);
+  }
+}

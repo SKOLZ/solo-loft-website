@@ -120,4 +120,15 @@
           mask-composite: subtract;
   animation: spin 1.5s infinite linear;
 }
-@keyframes spin {to{transform: rotate(1turn)}}
+
+@keyframes spin {
+  to{
+    transform: rotate(1turn)
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .contact-form {
+    align-self: center;
+  }
+}
