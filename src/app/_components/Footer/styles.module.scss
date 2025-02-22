@@ -69,3 +69,18 @@
   max-width: 120px;
   margin-bottom: 0.375rem;
 }
+
+@media screen and (max-width: 768px) {
+  .footer::after {
+    left: calc(1.25rem - 9px);
+  }
+
+  .footer-container {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .footer-group:last-child {
+    align-self: end;
+  }
+}

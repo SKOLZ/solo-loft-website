@@ -29,11 +29,6 @@
   min-height: 100dvh;
 }
 
-.main-container {
-  flex: 1;
-  padding: 5rem;
-}
-
 .container {
   width: 100%;
   max-width: 1280px;
@@ -60,6 +55,12 @@
   }
 }
 
+.main-container {
+  flex: 1;
+  padding-block: 5rem;
+  padding-inline: calc(7.5rem - 17px / 2);
+}
+
 .link {
   color: var(--white);
   transition: color 0.2s;
@@ -79,4 +80,18 @@ select {
   background-repeat: no-repeat;
   background-position: right 0.7rem top 50%;
   background-size: 0.65rem auto;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 2.5rem 4rem;
+
+    &::before {
+      left: 1.25rem;
+    }
+  
+    &::after {
+      right: 1.25rem;
+    }
+  }
 }

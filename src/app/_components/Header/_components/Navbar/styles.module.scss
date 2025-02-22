@@ -19,3 +19,120 @@
     background-color: var(--gray-2);
   }
 }
+
+.hamburger {
+  padding: 0.5rem;
+  position: relative;
+  background-color: var(--gray-2);
+  border-radius: 50%;
+  border: 0.5rem solid var(--gray-1);
+  width: calc(2.5rem + 1rem);
+  height: calc(2.5rem + 1rem);
+
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    width: calc(100% - 2 * 0.5rem - 0.25rem);
+    left: 0.625rem;
+    height: 3px;
+    background-color: var(--white);
+    border-radius: 0.125rem;
+    position: absolute;
+    transition: scale 0.3s ease, rotate 0.5s ease;;
+    will-change: scale;
+    transform: translateZ(0);
+    pointer-events: none;
+  }
+
+  &::before {
+    top: calc(50% - 3px - 0.25rem);
+    transform-origin: 0 50%;
+  }
+
+  &::after {
+    top: calc(50% + 0.25rem);
+    transform-origin: 0 50%;
+  }
+
+  &:hover::before {
+    scale: 1.2 1;
+  }
+
+  &:hover::after {
+    scale: 0.8 1;
+  }
+}
+
+.hamburger-checkbox {
+  opacity: 0;
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  :global(.body):has(.navbar .hamburger-checkbox:checked) {
+    overflow: hidden;
+  }
+
+  :global(.container):has(> .navbar .hamburger-checkbox:checked) {
+    padding-top: calc(2.5rem + 3.5rem);
+  }
+
+  .navbar:has(.hamburger-checkbox) {
+    background-color: transparent;
+    transition: background-color 0.5s ease;
+    padding: 0;
+  }
+
+  .navbar:has(.hamburger-checkbox:checked) {
+    position: fixed;
+    inset: 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    border-radius: 0;
+    z-index: 2;
+    padding: 2.5rem 0.5rem 6rem;
+    background-color: var(--black);
+  }
+  
+  .hamburger:has(.hamburger-checkbox:checked) {
+    margin-bottom: auto;
+
+    &::before {
+      rotate: 30deg;
+      scale: 1.12 1;
+    }
+
+    &::after {
+      rotate: -30deg;
+      scale: 1.12 1;
+    }
+  }
+
+  .navbar-item {
+    display: none;
+    opacity: 0;
+
+    &:last-child {
+      margin-bottom: auto;
+    }
+  }
+
+  .navbar:has(.hamburger-checkbox:checked) .navbar-item {
+    @starting-style {
+      opacity: 0;
+    }
+    display: block;
+    opacity: 1;
+    transition: opacity 2s ease;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .hamburger {
+    display: none;
+  }
+}
