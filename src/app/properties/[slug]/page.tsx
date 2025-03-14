@@ -36,6 +36,7 @@ const PropertyDetailsPage: React.FC<Props> = async ({ params }) => {
           <PropertyAssetsViewer
             photos={property.photos}
             videos={property.videos}
+            className={styles.assetViewer}
           />
           <div className={styles.propertyInfoWrapper}>
             <TransactionTypeTag transactionType={property.transactionType} />

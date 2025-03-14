@@ -24,7 +24,6 @@
 }
 
 .property-district {
-  font-size: 1;
   line-height: 1.5rem;
   letter-spacing: 2px;
   color: var(--gray-5);
@@ -111,4 +110,67 @@
   color: var(--white);
   align-items: center;
   margin-bottom: 2.5rem;
+}
+
+@media screen and (max-width: 1024px) {
+  .property-info-container {
+    flex-direction: column;
+    align-items: start;
+    gap: 0;
+  }
+
+  .property-info-wrapper {
+    display: contents;
+  }
+
+  .transaction-type {
+    order: 1;
+  }
+
+  .property-address {
+    order: 2;
+  }
+
+  .property-district {
+    order: 3;
+  }
+
+  .asset-viewer {
+    order: 4;
+  }
+
+  .property-features {
+    order: 5;
+    margin-top: 0.75rem;
+  }
+
+  .property-price {
+    order: 6;
+    margin-top: 0.75rem;
+  }
+
+  .property-expenses {
+    order: 7;
+  }
+
+  .property-contact-cta {
+    order: 8;
+    margin-top: 0.75rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .property-contact-cta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .property-features {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .property-address,
+  .property-price {
+    font-size: 2.25rem;
+  }
 }
