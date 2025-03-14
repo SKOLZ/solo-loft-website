@@ -15,9 +15,14 @@ import { AssetModal } from "./_components/AssetModal";
 interface Props {
   photos: PropertyFragment["photos"];
   videos: PropertyFragment["videos"];
+  className?: string;
 }
 
-export const PropertyAssetsViewer: React.FC<Props> = ({ photos, videos }) => {
+export const PropertyAssetsViewer: React.FC<Props> = ({
+  photos,
+  videos,
+  className,
+}) => {
   const [activeAssetType, setActiveAssetType] = useState<AssetType>(
     ASSET_TYPES.photos
   );
@@ -46,7 +51,7 @@ export const PropertyAssetsViewer: React.FC<Props> = ({ photos, videos }) => {
   };
 
   return (
-    <div className={styles.assetViewerContainer}>
+    <div className={`${className} ${styles.assetViewerContainer}`}>
       <AssetModal
         isModalOpen={isModalOpen}
         closeModal={closeModal}
