@@ -7,7 +7,6 @@ import { AssetCarousel } from "./_components/AssetCarousel";
 import styles from "./styles.module.scss";
 import { getYouTubeVideoId } from "@/utils/getYouTuveVideoId";
 import { YoutubeEmbed } from "@/app/_components/YouTubeEmbed";
-import ReactModal from "react-modal";
 import "@/styles/overrides/react-modal.scss";
 import Slider from "react-slick";
 import { AssetModal } from "./_components/AssetModal";

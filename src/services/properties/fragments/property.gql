@@ -25,4 +25,7 @@ fragment Property on Property {
   videos {
     url
   }
+  seo {
+    ...Seo
+  }
 }

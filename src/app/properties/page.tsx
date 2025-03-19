@@ -8,6 +8,7 @@ export const revalidate = 3600; // invalidate every hour
 
 export const metadata: Metadata = {
   title: "Solo Loft - Propiedades",
+  description: "Encuentra las mejores propiedades en Solo Loft",
 };
 
 interface Props {}

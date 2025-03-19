@@ -1,0 +1,10 @@
+fragment Seo on Seo {
+  title
+  description
+  image {
+    url
+    width
+    height
+    mimeType
+  }
+}

@@ -1,7 +1,10 @@
 import { RichText } from "@graphcms/rich-text-react-renderer";
 import { PropertyFeatures } from "@/app/_components/PropertyFeatures";
 import { TransactionTypeTag } from "@/app/_components/TransactionTypeTag";
-import { getPropertyDetails } from "@/services/properties";
+import {
+  getAllPropertyIdentifiers,
+  getPropertyDetails,
+} from "@/services/properties";
 import { formatNumber } from "@/utils/formatNumber";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,12 +14,30 @@ import { districtTextMap } from "@/utils/districtTextMap";
 import { Carousel } from "@/app/_components/Carousel";
 import { Map } from "./_components/Map";
 import { PropertyAssetsViewer } from "./_components/PropertyAssetsViewer";
+import { buildMetadata } from "@/utils/buildMetadata";
 
 interface Props {
   params: {
     slug?: string;
   };
 }
+
+export const generateMetadata = async ({ params }: Props) => {
+  const property = await getPropertyDetails(params.slug!);
+
+  if (!property?.seo) {
+    return null;
+  }
+
+  return buildMetadata(property.seo, `/properties/${params.slug}`);
+};
+
+export const generateStaticParams = async () => {
+  const properties = await getAllPropertyIdentifiers();
+  return properties.map((property) => ({
+    slug: property.slug,
+  }));
+};
 
 const PropertyDetailsPage: React.FC<Props> = async ({ params }) => {
   const property = await getPropertyDetails(params.slug!);
