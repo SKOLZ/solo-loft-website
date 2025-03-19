@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 import style from "./styles.module.scss";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { Icon } from "leaflet";
 
@@ -11,7 +11,7 @@ interface Props {
   lng: number;
 }
 
-export const Map: React.FC<Props> = ({ lat, lng }) => {
+const Map: React.FC<Props> = ({ lat, lng }) => {
   const center = useMemo(() => ({ lat, lng }), [lat, lng]);
 
   const defaultIcon = new Icon({
@@ -38,3 +38,5 @@ export const Map: React.FC<Props> = ({ lat, lng }) => {
     </MapContainer>
   );
 };
+
+export default Map;

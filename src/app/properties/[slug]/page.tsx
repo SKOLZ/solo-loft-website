@@ -6,13 +6,16 @@ import {
   getPropertyDetails,
 } from "@/services/properties";
 import { formatNumber } from "@/utils/formatNumber";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import styles from "./styles.module.scss";
 import { districtTextMap } from "@/utils/districtTextMap";
-import { Carousel } from "@/app/_components/Carousel";
-import { Map } from "./_components/Map";
+
+import dynamic from "next/dynamic";
+//@ts-ignore
+const Map = dynamic(() => import("./_components/Map"), {
+  ssr: false,
+});
 import { PropertyAssetsViewer } from "./_components/PropertyAssetsViewer";
 import { buildMetadata } from "@/utils/buildMetadata";
 
