@@ -26,6 +26,7 @@
     "react-hook-form": "^7.53.0",
     "react-hot-toast": "^2.4.1",
     "react-leaflet": "4.2.1",
+    "react-lite-youtube-embed": "^2.4.0",
     "react-modal": "^3.16.3",
     "react-phone-input-2": "^2.15.1",
     "react-slick": "^0.30.2",

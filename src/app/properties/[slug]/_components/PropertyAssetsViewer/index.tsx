@@ -22,8 +22,8 @@ export const PropertyAssetsViewer: React.FC<Props> = ({
   videos,
   className,
 }) => {
-  const [activeAssetType, setActiveAssetType] = useState<AssetType>(
-    ASSET_TYPES.photos
+  const [activeAssetType, setActiveAssetType] = useState<AssetType>(() =>
+    videos.length ? ASSET_TYPES.videos : ASSET_TYPES.photos
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
@@ -103,16 +103,20 @@ export const PropertyAssetsViewer: React.FC<Props> = ({
       {!!photos.length && !!videos.length && (
         <>
           <button
-            className={`${styles.assetViewerTypeSwitcher} ${styles.photos}`}
-            onClick={onSetPhotosAsActive}
-          >
-            <i className="ic ic-photo" />
-          </button>
-          <button
-            className={`${styles.assetViewerTypeSwitcher} ${styles.videos}`}
+            className={`${styles.assetViewerTypeSwitcher} ${styles.videos} ${
+              activeAssetType === ASSET_TYPES.videos ? styles.active : ""
+            }`}
             onClick={() => setActiveAssetType(ASSET_TYPES.videos)}
           >
             <i className="ic ic-video" />
+          </button>
+          <button
+            className={`${styles.assetViewerTypeSwitcher} ${styles.photos} ${
+              activeAssetType === ASSET_TYPES.photos ? styles.active : ""
+            }`}
+            onClick={onSetPhotosAsActive}
+          >
+            <i className="ic ic-photo" />
           </button>
         </>
       )}

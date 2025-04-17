@@ -1,5 +1,5 @@
 query getAllProperties {
-  properties(first: 12) {
+  properties(first: 50) {
     ...PropertySummary
   }
 }

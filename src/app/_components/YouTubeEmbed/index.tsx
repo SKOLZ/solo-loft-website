@@ -1,3 +1,6 @@
+import LiteYouTubeEmbed from "react-lite-youtube-embed";
+import "@/styles/overrides/react-lite-youtube-embed.scss";
+
 type YoutubeEmbedProps = {
   embedId: string;
   width: number;
@@ -12,12 +15,11 @@ export const YoutubeEmbed = ({
   className,
 }: YoutubeEmbedProps) => (
   <div className={className}>
-    <iframe
-      width={width}
-      height={height}
-      src={`https://www.youtube.com/embed/${embedId}?modestbranding=1&showinfo=0&rel=0`}
-      allowFullScreen
+    <LiteYouTubeEmbed
+      id={embedId}
       title="Embedded youtube"
+      aspectWidth={4}
+      aspectHeight={3}
     />
   </div>
 );

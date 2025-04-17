@@ -36,17 +36,22 @@
   cursor: pointer;
   transition: scale 0.3s;
 
-  &:hover {
+  &:not(.active):hover {
     scale: 1.05;
   }
 
   &.photos {
     left: 50%;
+    transform: translateX(0.375rem);
+  }
+  
+  &.videos {
+    left: 50%;
     transform: translateX(calc(-100% - 0.375rem));
   }
 
-  &.videos {
-    left: 50%;
-    transform: translateX(0.375rem);
+  &.active {
+    opacity: 0.75;
+    cursor: default;
   }
 }
