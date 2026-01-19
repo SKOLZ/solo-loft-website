@@ -11,6 +11,12 @@
     position: absolute;
     left: 0;
     bottom: 0;
+    transition: opacity var(--line-fade-duration) cubic-bezier(0.5, 0, 0.75, 0);
+    opacity: 1;
+
+    @starting-style {
+      opacity: 0;
+    }
   }
 
   &::after {
@@ -22,6 +28,12 @@
     bottom: -10px;
     right: max((100% - 1280px) / 2 + 2.5rem - 10px, 2.5rem - 10px);
     z-index: 1;
+    transition: opacity var(--line-fade-duration) cubic-bezier(0.5, 0, 0.75, 0);
+    opacity: 1;
+
+    @starting-style {
+      opacity: 0;
+    }
   }
 }
 

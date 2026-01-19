@@ -11,10 +11,18 @@
   color: var(--white);
   letter-spacing: 10px;
   text-transform: uppercase;
+  will-change: filter; /* Optimize for filter animations */
 }
 
 .text-glow {
   animation: glow 2s infinite alternate;
+  animation-delay: 2s; /* Start glow after blur animation completes */
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .logoAnimation {
+    opacity: 0;
+  }
 }
 
 @keyframes glow {

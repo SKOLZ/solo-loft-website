@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "@/styles/globals.scss";
 import { Footer } from "./_components/Footer";
 import { Header } from "./_components/Header";
+import { PageTransition } from "./_components/PageTransition";
 import { Toaster } from "react-hot-toast";
 
 const poppins = Poppins({
@@ -26,7 +27,7 @@ export default function RootLayout({
     <html lang="en">
       <body id="root" className={`${poppins.variable} body`}>
         <Header />
-        <main className="container main-container">{children}</main>
+        <PageTransition>{children}</PageTransition>
         <Footer />
         <Toaster
           toastOptions={{

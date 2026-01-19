@@ -11,21 +11,18 @@ import { notFound } from "next/navigation";
 import styles from "./styles.module.scss";
 import { districtTextMap } from "@/utils/districtTextMap";
 
-import dynamic from "next/dynamic";
-//@ts-ignore
-const Map = dynamic(() => import("./_components/Map"), {
-  ssr: false,
-});
 import { PropertyAssetsViewer } from "./_components/PropertyAssetsViewer";
 import { buildMetadata } from "@/utils/buildMetadata";
+import Map from "./_components/Map";
 
 interface Props {
-  params: {
+  params: Promise<{
     slug?: string;
-  };
+  }>;
 }
 
-export const generateMetadata = async ({ params }: Props) => {
+export const generateMetadata = async (props: Props) => {
+  const params = await props.params;
   const property = await getPropertyDetails(params.slug!);
 
   if (!property?.seo) {
@@ -42,7 +39,8 @@ export const generateStaticParams = async () => {
   }));
 };
 
-const PropertyDetailsPage: React.FC<Props> = async ({ params }) => {
+const PropertyDetailsPage: React.FC<Props> = async (props) => {
+  const params = await props.params;
   const property = await getPropertyDetails(params.slug!);
 
   if (!property) {

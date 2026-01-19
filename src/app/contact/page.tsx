@@ -18,7 +18,8 @@ interface Props {
   searchParams?: { [key: string]: string | undefined };
 }
 
-const ContactPage: React.FC<Props> = async ({ searchParams }) => {
+const ContactPage: React.FC<Props> = async props => {
+  const searchParams = await props.searchParams;
   const propertyIdentifiersPromise = getAllPropertyIdentifiers();
   const contactInformationPromise = getCachedContactInformation();
   const [propertyIdentifiers, contactInformation] = await Promise.all([

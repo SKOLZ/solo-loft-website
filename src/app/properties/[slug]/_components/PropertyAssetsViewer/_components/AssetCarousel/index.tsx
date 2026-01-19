@@ -10,7 +10,7 @@ interface Props<T> {
   arrowClassName?: string;
   arrowVariant?: SliderArrowVariant;
   settings?: Settings;
-  sliderRef?: React.RefObject<Slider>;
+  sliderRef?: React.RefObject<Slider | null>;
 }
 
 export const AssetCarousel = <T,>({

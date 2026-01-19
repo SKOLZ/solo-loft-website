@@ -11,7 +11,7 @@ interface CarouselProps extends PropsWithChildren {
   settings?: Settings;
   arrowVariant?: SliderArrowVariant;
   arrowClassName?: string;
-  sliderRef?: React.RefObject<Slider>;
+  sliderRef?: React.RefObject<Slider | null>;
 }
 
 export const Carousel: React.FC<CarouselProps> = ({
