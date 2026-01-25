@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
       revalidatePath("/properties");
       revalidatePath(`/properties/${publishedPage.data.slug}`);
     case "ContactInformation":
-      revalidateTag("contact-information");
+      revalidateTag("contact-information", { expire: 0 });
     case "AboutUs":
       revalidatePath("/about-us");
   }

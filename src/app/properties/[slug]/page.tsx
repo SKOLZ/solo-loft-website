@@ -13,7 +13,7 @@ import { districtTextMap } from "@/utils/districtTextMap";
 
 import { PropertyAssetsViewer } from "./_components/PropertyAssetsViewer";
 import { buildMetadata } from "@/utils/buildMetadata";
-import Map from "./_components/Map";
+import { MapWrapper } from "./_components/MapWrapper";
 
 interface Props {
   params: Promise<{
@@ -97,7 +97,7 @@ const PropertyDetailsPage: React.FC<Props> = async (props) => {
           </article>
         )}
         {property.location && (
-          <Map
+          <MapWrapper
             lat={property.location.latitude}
             lng={property.location.longitude}
           />

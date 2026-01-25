@@ -11,14 +11,14 @@ const getCachedContactInformation = unstable_cache(
   ["contact-information"],
   {
     tags: ["contact-information"],
-  }
+  },
 );
 
 interface Props {
-  searchParams?: { [key: string]: string | undefined };
+  searchParams?: Promise<{ [key: string]: string | undefined }>;
 }
 
-const ContactPage: React.FC<Props> = async props => {
+const ContactPage: React.FC<Props> = async (props) => {
   const searchParams = await props.searchParams;
   const propertyIdentifiersPromise = getAllPropertyIdentifiers();
   const contactInformationPromise = getCachedContactInformation();

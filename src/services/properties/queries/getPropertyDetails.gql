@@ -1,5 +1,5 @@
 query getPropertyDetails($slug: String!) {
-  properties(where: { slug: $slug }) {
+  property(where: { slug: $slug }) {
     ...Property
   }
 }

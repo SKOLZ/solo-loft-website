@@ -8,7 +8,7 @@ export const getAllProperties = async () => {
 
 export const getPropertyDetails = async (slug: string) => {
   const response = await getSdk(client).getPropertyDetails({ slug });
-  return response.properties[0];
+  return response.property;
 };
 
 export const getAllPropertyIdentifiers = async () => {
