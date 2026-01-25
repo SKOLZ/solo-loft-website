@@ -17,7 +17,7 @@
   --white: #FFF;
   --black: #000;
 
-  --line-fade-duration: 2s;
+  --line-fade-duration: 1s;
 }
 
 * {
@@ -46,7 +46,7 @@
     position: absolute;
     top: 0;
     background-color: oklch(from var(--white) l c h / 0.12);
-    transition: opacity var(--line-fade-duration) cubic-bezier(0.5, 0, 0.75, 0);
+    transition: opacity var(--line-fade-duration) ease;
     opacity: 1;
 
     @starting-style {
@@ -104,8 +104,31 @@ select {
   }
 }
 
-::view-transition-old(*),
-::view-transition-new(*) {
-  animation-duration: 0.5s;
-  animation-timing-function: cubic-bezier(0.5, 0, 0.75, 0)-out;
+@keyframes content-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes content-exit {
+  to {
+    opacity: 0;
+    transform: translateY(0);
+  }
+}
+
+::view-transition-old(page) {
+  opacity: 1;
+  animation: content-exit 600ms ease-out forwards;
+
+}
+::view-transition-new(page) {
+  opacity: 0;
+  animation: content-enter 600ms ease-out forwards;
+  animation-delay: 200ms;
 }

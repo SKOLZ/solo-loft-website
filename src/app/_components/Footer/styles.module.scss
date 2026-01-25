@@ -11,7 +11,7 @@
     position: absolute;
     left: 0;
     top: 0;
-    transition: opacity var(--line-fade-duration) cubic-bezier(0.5, 0, 0.75, 0);
+    transition: opacity var(--line-fade-duration) ease;
     opacity: 1;
 
     @starting-style {
@@ -28,7 +28,7 @@
     top: -9px;
     left: max((100% - 1280px) / 2 + 2.5rem - 9px, 2.5rem - 9px);
     z-index: 1;
-    transition: opacity var(--line-fade-duration) cubic-bezier(0.5, 0, 0.75, 0);
+    transition: opacity var(--line-fade-duration) ease;
     opacity: 1;
 
     @starting-style {

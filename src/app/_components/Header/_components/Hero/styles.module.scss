@@ -2,6 +2,14 @@
   align-items: center;
   padding-block: 5rem 2.5rem;
   text-align: center;
+  opacity: 1;
+  translate: 0;
+  transition: all 1.2s ease 0.8s;
+
+  @starting-style {
+    opacity: 0;
+    translate: 0 20px;
+  }
 }
 
 .hero-logo {
@@ -17,12 +25,6 @@
 .text-glow {
   animation: glow 2s infinite alternate;
   animation-delay: 2s; /* Start glow after blur animation completes */
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .logoAnimation {
-    opacity: 0;
-  }
 }
 
 @keyframes glow {

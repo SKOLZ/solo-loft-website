@@ -1,51 +1,29 @@
 "use client";
 
-import { useRef, ViewTransition } from "react";
-import { gsap } from "gsap";
+import { ViewTransition } from "react";
+import { useEffect, useRef } from "react";
+import styles from "./styles.module.scss";
 
 interface PageTransitionProps {
   children: React.ReactNode;
 }
 
 export const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
-  const ref = useRef<HTMLElement>(null);
+  const mainRef = useRef<HTMLElement>(null);
 
-  const handleExit = () => {
-    // Exit animation: fade out
-    console.log("exit");
-    return gsap
-      .to(ref.current, {
-        opacity: 0,
-        duration: 0.3,
-        ease: "power2.out",
-      })
-      .then();
-  };
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      mainRef.current?.classList.add(styles.loaded);
+    }, 2000);
 
-  const handleEnter = () => {
-    console.log("enter");
-    return gsap
-      .fromTo(
-        ref.current,
-        {
-          opacity: 0,
-          y: 40,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          ease: "power2.out",
-        },
-      )
-      .then();
-  };
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
-    // <ViewTransition onExit={handleExit} onEnter={handleEnter}>
-    <main className="container main-container" ref={ref}>
-      {children}
+    <main ref={mainRef} className="container main-container">
+      <ViewTransition name="page">
+        <div className={styles.initializationAnimation}>{children}</div>
+      </ViewTransition>
     </main>
-    // </ViewTransition>
   );
 };
