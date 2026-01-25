@@ -16,6 +16,8 @@
   --blue-2: #4C5F90;
   --white: #FFF;
   --black: #000;
+
+  --line-fade-duration: 1s;
 }
 
 * {
@@ -44,6 +46,12 @@
     position: absolute;
     top: 0;
     background-color: oklch(from var(--white) l c h / 0.12);
+    transition: opacity var(--line-fade-duration) ease;
+    opacity: 1;
+
+    @starting-style {
+      opacity: 0;
+    }
   }
 
   &::before {
@@ -94,4 +102,33 @@ select {
       right: 1.25rem;
     }
   }
+}
+
+@keyframes content-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes content-exit {
+  to {
+    opacity: 0;
+    transform: translateY(0);
+  }
+}
+
+::view-transition-old(page) {
+  opacity: 1;
+  animation: content-exit 600ms ease-out forwards;
+
+}
+::view-transition-new(page) {
+  opacity: 0;
+  animation: content-enter 600ms ease-out forwards;
+  animation-delay: 200ms;
 }

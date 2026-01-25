@@ -15,7 +15,7 @@ export const sendEmail = async ({
   turnstileToken,
 }: SendEmailProps) => {
   // If using a reverse proxy, ensure the X-Real-IP header is enabled to accurately capture the client's original IP address.
-  const ip = headers().get("x-real-ip");
+  const ip = (await headers()).get("x-real-ip");
 
   // Create form data for Turnstile verification
   const verifyFormData = new FormData();
