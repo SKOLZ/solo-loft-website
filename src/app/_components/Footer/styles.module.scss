@@ -96,3 +96,14 @@
     align-self: end;
   }
 }
+
+.footer-attribution {
+  color: var(--gray-5);
+  position: absolute;
+  top: 2.625rem;
+  left: 1.75rem;
+
+  &:hover {
+    color: var(--white);
+  }
+}
