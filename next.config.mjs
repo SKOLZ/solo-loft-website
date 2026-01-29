@@ -24,7 +24,7 @@ const nextConfig = {
     });
 
     const fileLoaderRule = config.module.rules.find((rule) =>
-      rule.test?.test?.(".svg")
+      rule.test?.test?.(".svg"),
     );
 
     config.module.rules.push(
@@ -40,13 +40,14 @@ const nextConfig = {
         issuer: fileLoaderRule.issuer,
         resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] }, // exclude if *.svg?url
         use: ["@svgr/webpack"],
-      }
+      },
     );
     // Modify the file loader rule to ignore *.svg, since we have it handled now.
     fileLoaderRule.exclude = /\.svg$/i;
 
     return config;
   },
+  cacheComponents: true,
   images: {
     remotePatterns: [
       {
