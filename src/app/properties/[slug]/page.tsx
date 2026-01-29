@@ -13,8 +13,7 @@ import { districtTextMap } from "@/utils/districtTextMap";
 
 import { PropertyAssetsViewer } from "./_components/PropertyAssetsViewer";
 import { buildMetadata } from "@/utils/buildMetadata";
-import { MapWrapper } from "./_components/MapWrapper";
-import { Suspense } from "react";
+import Map from "./_components/Map";
 
 interface Props {
   params: Promise<{
@@ -98,12 +97,10 @@ const PropertyDetailsPage: React.FC<Props> = async (props) => {
           </article>
         )}
         {property.location && (
-          <Suspense fallback={<div>Cargando mapa...</div>}>
-            <MapWrapper
-              lat={property.location.latitude}
-              lng={property.location.longitude}
-            />
-          </Suspense>
+          <Map
+            lat={property.location.latitude}
+            lng={property.location.longitude}
+          />
         )}
       </section>
     </>

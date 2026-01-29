@@ -1,10 +1,8 @@
 "use client";
 
-import { useMemo } from "react";
 import style from "./styles.module.scss";
-import { MapContainer, Marker, TileLayer } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import { Icon } from "leaflet";
+import MapContainer from "react-map-gl/maplibre";
+import "maplibre-gl/dist/maplibre-gl.css";
 
 interface Props {
   lat: number;
@@ -12,30 +10,17 @@ interface Props {
 }
 
 const Map: React.FC<Props> = ({ lat, lng }) => {
-  const center = useMemo(() => ({ lat, lng }), [lat, lng]);
-
-  const defaultIcon = new Icon({
-    iconUrl:
-      "https://sa-east-1.graphassets.com/clzbzounr059207j00w2u668e/cm6nkvhxp11qc07kkf5d8bny4",
-    iconSize: [27, 36],
-    iconAnchor: [12, 36],
-    popupAnchor: [1, -36],
-    shadowSize: [36, 36],
-  });
-
   return (
-    <MapContainer
-      center={center}
-      zoom={17}
-      scrollWheelZoom={true}
-      className={style.mapContainer}
-    >
-      <TileLayer
-        attribution=""
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    <div className={style.mapContainer}>
+      <MapContainer
+        initialViewState={{
+          longitude: lat,
+          latitude: lng,
+          zoom: 17,
+        }}
+        mapStyle="https://api.maptiler.com/maps/streets/style.json?key=ETYUbTqaV4poyV2t8ZDG"
       />
-      <Marker icon={defaultIcon} position={center} />
-    </MapContainer>
+    </div>
   );
 };
 
