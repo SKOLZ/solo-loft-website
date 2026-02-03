@@ -13,7 +13,7 @@ import { districtTextMap } from "@/utils/districtTextMap";
 
 import { PropertyAssetsViewer } from "./_components/PropertyAssetsViewer";
 import { buildMetadata } from "@/utils/buildMetadata";
-import Map from "./_components/Map";
+import { Map } from "./_components/Map";
 
 interface Props {
   params: Promise<{
