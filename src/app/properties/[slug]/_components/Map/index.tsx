@@ -1,42 +1,42 @@
 "use client";
 
-import { useMemo } from "react";
 import style from "./styles.module.scss";
-import { MapContainer, Marker, TileLayer } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import { Icon } from "leaflet";
+import MapContainer, { Marker } from "react-map-gl/maplibre";
+import "maplibre-gl/dist/maplibre-gl.css";
 
 interface Props {
   lat: number;
   lng: number;
 }
 
-const Map: React.FC<Props> = ({ lat, lng }) => {
-  const center = useMemo(() => ({ lat, lng }), [lat, lng]);
-
-  const defaultIcon = new Icon({
-    iconUrl:
-      "https://sa-east-1.graphassets.com/clzbzounr059207j00w2u668e/cm6nkvhxp11qc07kkf5d8bny4",
-    iconSize: [27, 36],
-    iconAnchor: [12, 36],
-    popupAnchor: [1, -36],
-    shadowSize: [36, 36],
-  });
-
+export const Map: React.FC<Props> = ({ lat, lng }) => {
   return (
-    <MapContainer
-      center={center}
-      zoom={17}
-      scrollWheelZoom={true}
-      className={style.mapContainer}
-    >
-      <TileLayer
-        attribution=""
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <Marker icon={defaultIcon} position={center} />
-    </MapContainer>
+    <div className={style.mapContainer}>
+      <MapContainer
+        initialViewState={{
+          latitude: lat,
+          longitude: lng,
+          zoom: 15,
+        }}
+        mapStyle="/style.json"
+      >
+        <Marker longitude={lng} latitude={lat} anchor="bottom" draggable>
+          <svg
+            height={40}
+            viewBox="-2 -2 28 28"
+            stroke="#fff"
+            strokeWidth="2"
+            fill="#000"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M20.2,15.7L20.2,15.7c1.1-1.6,1.8-3.6,1.8-5.7c0-5.6-4.5-10-10-10S2,4.5,2,10c0,2,0.6,3.9,1.6,5.4c0,0.1,0.1,0.2,0.2,0.3
+  c0,0,0.1,0.1,0.1,0.2c0.2,0.3,0.4,0.6,0.7,0.9c2.6,3.1,7.4,7.6,7.4,7.6s4.8-4.5,7.4-7.5c0.2-0.3,0.5-0.6,0.7-0.9
+  C20.1,15.8,20.2,15.8,20.2,15.7z"
+            />
+          </svg>
+        </Marker>
+      </MapContainer>
+    </div>
   );
 };
-
-export default Map;

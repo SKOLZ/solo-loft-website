@@ -4,8 +4,6 @@ import { PropertyCard } from "./_components/PropertyCard";
 import styles from "./styles.module.scss";
 import { Metadata } from "next";
 
-export const revalidate = 3600; // invalidate every hour
-
 export const metadata: Metadata = {
   title: "Solo Loft - Propiedades",
   description: "Encuentra las mejores propiedades en Solo Loft",

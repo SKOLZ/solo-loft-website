@@ -1,0 +1,4 @@
+fragment PropertySitemapData on Property {
+  slug
+  updatedAt
+}
