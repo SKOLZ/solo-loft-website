@@ -2,31 +2,21 @@ import { getAllPropertyIdentifiers } from "@/services/properties";
 import { ContactForm } from "./_components/ContactForm";
 import styles from "./styles.module.scss";
 import { getContactInformation } from "@/services/contactInformation";
-import { unstable_cache } from "next/cache";
-
-const getCachedContactInformation = unstable_cache(
-  async () => {
-    return getContactInformation();
-  },
-  ["contact-information"],
-  {
-    tags: ["contact-information"],
-  },
-);
+import { Suspense } from "react";
+import { ContactFormInner } from "./_components/ContactForm/_components/ContactFormInner";
 
 interface Props {
   searchParams?: Promise<{ [key: string]: string | undefined }>;
 }
 
 const ContactPage: React.FC<Props> = async (props) => {
-  const searchParams = await props.searchParams;
+  const initialPropertyId = props.searchParams?.then((sp) => sp.propertyId);
   const propertyIdentifiersPromise = getAllPropertyIdentifiers();
-  const contactInformationPromise = getCachedContactInformation();
+  const contactInformationPromise = getContactInformation();
   const [propertyIdentifiers, contactInformation] = await Promise.all([
     propertyIdentifiersPromise,
     contactInformationPromise,
   ]);
-  const initialPropertyId = searchParams?.propertyId;
   return (
     <section className={styles.contactContainer}>
       <div className={styles.contactInfoContainer}>
@@ -52,10 +42,16 @@ const ContactPage: React.FC<Props> = async (props) => {
           )}
         </ul>
       </div>
-      <ContactForm
-        propertyIdentifiers={propertyIdentifiers}
-        initialPropertyId={initialPropertyId}
-      />
+      <Suspense
+        fallback={
+          <ContactFormInner isDisabled={true} propertyIdentifiers={[]} />
+        }
+      >
+        <ContactForm
+          propertyIdentifiers={propertyIdentifiers}
+          initialPropertyId={initialPropertyId}
+        />
+      </Suspense>
     </section>
   );
 };
