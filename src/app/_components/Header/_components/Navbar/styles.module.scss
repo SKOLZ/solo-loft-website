@@ -6,7 +6,7 @@
   border-radius: 3rem;
 }
 
-.navbar-item {
+.navbarItem {
   font-size: 1rem;
   line-height: 1.5rem;
   letter-spacing: 2px;
@@ -64,7 +64,7 @@
   }
 }
 
-.hamburger-checkbox {
+.hamburgerCheckbox {
   opacity: 0;
   position: absolute;
   inset: 0;
@@ -76,17 +76,17 @@
     overflow: hidden;
   }
 
-  :global(.container):has(> .navbar .hamburger-checkbox:checked) {
+  :global(.container):has(> .navbar .hamburgerCheckbox:checked) {
     padding-top: calc(2.5rem + 3.5rem);
   }
 
-  .navbar:has(.hamburger-checkbox) {
+  .navbar:has(.hamburgerCheckbox) {
     background-color: transparent;
     transition: background-color 0.5s ease;
     padding: 0;
   }
 
-  .navbar:has(.hamburger-checkbox:checked) {
+  .navbar:has(.hamburgerCheckbox:checked) {
     position: fixed;
     inset: 0;
     flex-direction: column;
@@ -98,7 +98,7 @@
     background-color: var(--black);
   }
   
-  .hamburger:has(.hamburger-checkbox:checked) {
+  .hamburger:has(.hamburgerCheckbox:checked) {
     margin-bottom: auto;
 
     &::before {
@@ -112,7 +112,7 @@
     }
   }
 
-  .navbar-item {
+  .navbarItem {
     display: none;
     opacity: 0;
 
@@ -121,7 +121,7 @@
     }
   }
 
-  .navbar:has(.hamburger-checkbox:checked) .navbar-item {
+  .navbar:has(.hamburgerCheckbox:checked) .navbarItem {
     @starting-style {
       opacity: 0;
     }

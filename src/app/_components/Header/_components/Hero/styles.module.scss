@@ -12,7 +12,7 @@
   }
 }
 
-.hero-logo {
+.heroLogo {
   font-size: clamp(6rem, 12vw, 10rem);
   font-weight: 100;
   line-height: 1.25;
@@ -22,7 +22,7 @@
   will-change: filter; /* Optimize for filter animations */
 }
 
-.text-glow {
+.textGlow {
   animation: glow 2s infinite alternate;
   animation-delay: 2s; /* Start glow after blur animation completes */
 }

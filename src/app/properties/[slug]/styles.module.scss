@@ -1,21 +1,21 @@
-.property-container {
+.propertyContainer {
   display: flex;
   flex-direction: column;
   gap: 5rem;
 }
 
-.property-info-container {
+.propertyInfoContainer {
   display: flex;
   gap: 2.5rem;
 }
 
-.property-info-wrapper {
+.propertyInfoWrapper {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-.property-address {
+.propertyAddress {
   font-size: 2.5rem;
   line-height: 3.75rem;
   letter-spacing: 2px;
@@ -23,21 +23,21 @@
   color: var(--white);
 }
 
-.property-district {
+.propertyDistrict {
   line-height: 1.5rem;
   letter-spacing: 2px;
   color: var(--gray-5);
   margin-bottom: 0.75rem;
 }
 
-.property-features {
+.propertyFeatures {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 1rem 0.75rem;
   margin-bottom: 0.75rem;
 }
 
-.property-price {
+.propertyPrice {
   font-size: 2.5rem;
   line-height: 3.75rem;
   letter-spacing: 2px;
@@ -56,7 +56,7 @@
   margin-top: auto;
 }
 
-.property-expenses {
+.propertyExpenses {
   font-size: 1.125rem;
   line-height: 1.625rem;
   letter-spacing: 2px;
@@ -64,7 +64,7 @@
   margin-bottom: 0.75rem;
 }
 
-.property-contact-cta {
+.propertyContactCta {
   display: flex;
   gap: 0.5rem;
   color: var(--white);
@@ -78,7 +78,7 @@
   align-items: center;
 }
 
-.property-description {
+.propertyDescription {
   max-width: 82ch;
   color: var(--white);
 

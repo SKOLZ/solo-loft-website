@@ -1,4 +1,4 @@
-.modal-carousel {
+.modalCarousel {
   border-radius: 0.5rem;
   aspect-ratio: 4 / 3;
   width: 100%;
@@ -8,7 +8,7 @@
   pointer-events: none;
 }
 
-.modal-carousel-item {
+.modalCarouselItem {
   border-radius: 0.5rem;
   overflow: hidden;
   object-fit: contain;
@@ -16,13 +16,13 @@
   pointer-events: auto;
 }
 
-.modal-overlay {
+.modalOverlay {
   background: oklch(from var(--black) l c h / 0.9);;
   position: fixed;
   inset: 0;
 }
 
-.modal-content {
+.modalContent {
   background: transparent;
   position: absolute;
   inset: 0px;
@@ -32,7 +32,7 @@
   pointer-events: none;
 }
 
-.modal-close-button {
+.modalCloseButton {
   width: 24px;
   height: 24px;
   position: absolute;
@@ -45,14 +45,14 @@
   pointer-events: auto;
 }
 
-.modal-carousel-arrow {
+.modalCarouselArrow {
   pointer-events: auto;
   padding: 40px;
   height: 100%;
 }
 
 @media screen and (max-width: 768px) {
-  .modal-content {
+  .modalContent {
     display: flex;
     align-items: center;
   }

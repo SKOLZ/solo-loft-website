@@ -1,9 +1,9 @@
-.property-photo-wrapper {
+.propertyPhotoWrapper {
   font-size: 0;
 }
 
-.property-photo,
-.property-video {
+.propertyPhoto,
+.propertyVideo {
   border-radius: 0.5rem;
   aspect-ratio: 4 / 3;
   width: 100%;
@@ -12,7 +12,7 @@
   object-fit: cover;
 }
 
-.asset-viewer-container {
+.assetViewerContainer {
   position: relative;
   max-width: 500px;
   overflow: clip;
@@ -21,7 +21,7 @@
   width: 100%;
 }
 
-.asset-viewer-type-switcher {
+.assetViewerTypeSwitcher {
   position: absolute;
   bottom: 1.25rem;
   padding: 0.375rem 0.5rem;

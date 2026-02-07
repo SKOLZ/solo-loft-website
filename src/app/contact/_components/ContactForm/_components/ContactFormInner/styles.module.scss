@@ -1,11 +1,11 @@
-.contact-form {
+.contactForm {
   display: flex;
   flex-direction: column;
   width: 100%;
   max-width: 400px;
 }
 
-.contact-field {
+.contactField {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -13,7 +13,7 @@
   position: relative;
 }
 
-.contact-label {
+.contactLabel {
   font-size: 1rem;
   line-height: 1.5rem;
   color: var(--white);
@@ -21,7 +21,7 @@
   margin-left: 0.5rem;
 }
 
-.contact-input {
+.contactInput {
   padding: 0.5rem 0.75rem;
   background-color: var(--gray-1);
   color: var(--gray-5);
@@ -38,7 +38,7 @@
   }
 }
 
-.contact-error {
+.contactError {
   font-size: 0.75rem;
   color: var(--red-2);
   margin-left: 0.5rem;
@@ -46,7 +46,7 @@
   top: calc(100% + 2px);
 }
 
-.contact-button {
+.contactButton {
   padding: 0.75rem 1rem;
   background-color: oklch(from var(--white) l c h / 0.12);
   color: var(--white);
@@ -70,21 +70,21 @@
   }
 }
 
-.captcha-link {
+.captchaLink {
   color: var(--gray-5);
   text-decoration: underline;
 }
 
-.phone-container {
+.phoneContainer {
   font-family: inherit;
 
-  .phone-input {
-    @extend .contact-input;
+  .phoneInput {
+    @extend .contactInput;
     padding-inline-start: 3.5rem;
     height: auto;
   }
 
-  .phone-flag-selector {
+  .phoneFlagSelector {
     background-color: var(--gray-2);
     border: none;
     height: 2rem;
@@ -94,7 +94,7 @@
     left: 4px;
   }
 
-  .phone-dropdown {
+  .phoneDropdown {
     left: -3px;
     width: 400px;
     border-radius: 4px;
@@ -128,7 +128,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .contact-form {
+  .contactForm {
     align-self: center;
   }
 }

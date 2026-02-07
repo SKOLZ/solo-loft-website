@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "pnpm codegen --watch & next dev --webpack",
-    "build": "pnpm codegen & next build --webpack",
+    "dev": "next dev",
+    "build": "pnpm codegen & next build",
     "start": "next start",
     "lint": "eslint .",
     "codegen": "graphql-codegen --config codegen.ts"
