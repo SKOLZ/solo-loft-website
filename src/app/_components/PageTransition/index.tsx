@@ -22,7 +22,9 @@ export const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
   return (
     <main ref={mainRef} className="container main-container">
       <ViewTransition name="page">
-        <div className={styles.initializationAnimation}>{children}</div>
+        <div className={styles.initializationAnimation}>
+          <ViewTransition update="none">{children}</ViewTransition>
+        </div>
       </ViewTransition>
     </main>
   );
