@@ -1,3 +1,5 @@
+@use "sass:string";
+
 /*--------------------------------
 
 solo-loft icon font
@@ -103,7 +105,7 @@ $icons: (
 );
 
 @function unicode($str) {
-  @return unquote("\"\\#{$str}\"");
+  @return string.unquote("\"\\#{$str}\"");
 }
 
 @each $name, $code in $icons {

@@ -11,6 +11,8 @@ interface Props {
   photos: PropertyFragment["photos"];
 }
 
+ReactModal.setAppElement("body");
+
 export const PropertyImages: React.FC<Props> = ({ photos }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = (event: React.MouseEvent<HTMLButtonElement>) => {

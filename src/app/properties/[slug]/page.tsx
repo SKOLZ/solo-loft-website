@@ -14,6 +14,7 @@ import { districtTextMap } from "@/utils/districtTextMap";
 import { PropertyAssetsViewer } from "./_components/PropertyAssetsViewer";
 import { buildMetadata } from "@/utils/buildMetadata";
 import { Map } from "./_components/Map";
+import { ErrorBoundary } from "react-error-boundary";
 
 interface Props {
   params: Promise<{
@@ -97,10 +98,12 @@ const PropertyDetailsPage: React.FC<Props> = async (props) => {
           </article>
         )}
         {property.location && (
-          <Map
-            lat={property.location.latitude}
-            lng={property.location.longitude}
-          />
+          <ErrorBoundary fallback={null}>
+            <Map
+              lat={property.location.latitude}
+              lng={property.location.longitude}
+            />
+          </ErrorBoundary>
         )}
       </section>
     </>

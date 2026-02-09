@@ -13,6 +13,8 @@ interface Props {
   onSlideChange: (oldIndex: number, index: number) => void;
 }
 
+ReactModal.setAppElement("body");
+
 export const AssetModal: React.FC<Props> = ({
   isModalOpen,
   closeModal,

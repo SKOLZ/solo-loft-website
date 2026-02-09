@@ -46,7 +46,7 @@
   text-transform: uppercase;
 }
 
-.property-price {
+.propertyPrice {
   font-size: 2.5rem;
   line-height: 3.25rem;
   letter-spacing: 2px;
@@ -100,7 +100,7 @@
   }
 }
 
-.property-back-link {
+.propertyBackLink {
   display: flex;
   gap: .625rem;
   text-transform: uppercase;
@@ -113,64 +113,64 @@
 }
 
 @media screen and (max-width: 1024px) {
-  .property-info-container {
+  .propertyInfoContainer {
     flex-direction: column;
     align-items: start;
     gap: 0;
   }
 
-  .property-info-wrapper {
+  .propertyInfoWrapper {
     display: contents;
   }
 
-  .transaction-type {
+  .transactionType {
     order: 1;
   }
 
-  .property-address {
+  .propertyAddress {
     order: 2;
   }
 
-  .property-district {
+  .propertyDistrict {
     order: 3;
   }
 
-  .asset-viewer {
+  .assetViewer {
     order: 4;
   }
 
-  .property-features {
+  .propertyFeatures {
     order: 5;
     margin-top: 0.75rem;
   }
 
-  .property-price {
+  .propertyPrice {
     order: 6;
     margin-top: 0.75rem;
   }
 
-  .property-expenses {
+  .propertyExpenses {
     order: 7;
   }
 
-  .property-contact-cta {
+  .propertyContactCta {
     order: 8;
     margin-top: 0.75rem;
   }
 }
 
 @media screen and (max-width: 500px) {
-  .property-contact-cta {
+  .propertyContactCta {
     width: 100%;
     justify-content: center;
   }
 
-  .property-features {
+  .propertyFeatures {
     grid-template-columns: 1fr 1fr;
   }
 
-  .property-address,
-  .property-price {
+  .propertyAddress,
+  .propertyPrice {
     font-size: 2.25rem;
   }
 }

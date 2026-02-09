@@ -4,7 +4,9 @@
   text-align: center;
   opacity: 1;
   translate: 0;
-  transition: all 1.2s ease 0.8s;
+  transition:
+    opacity 1.2s ease 1s,
+    translate 1.2s ease 0.8s;
 
   @starting-style {
     opacity: 0;
@@ -19,12 +21,12 @@
   color: var(--white);
   letter-spacing: 10px;
   text-transform: uppercase;
-  will-change: filter; /* Optimize for filter animations */
+  will-change: filter;
 }
 
 .textGlow {
   animation: glow 2s infinite alternate;
-  animation-delay: 2s; /* Start glow after blur animation completes */
+  animation-delay: 2s;
 }
 
 @keyframes glow {
