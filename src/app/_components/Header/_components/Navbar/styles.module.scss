@@ -1,14 +1,32 @@
 .navbar {
   display: flex;
-  gap: 1rem;
-  padding: 0.5rem;
   background-color: var(--gray-1);
   border-radius: 3rem;
   opacity: 1;
   transition: opacity 2s ease;
+  position: relative;
 
   @starting-style {
     opacity: 0;
+  }
+
+  &:not(:has(.navbarItem:hover)) .navbarItem.active {
+    anchor-name: --h;
+  }
+
+
+  &::before {
+    content: '';
+    position-anchor: --h;
+    left: calc(anchor(left) + 0.5rem);
+    top: 0.5rem;
+    background-color: var(--gray-2);
+    width: calc(anchor-size(width) - 1rem);
+    height: calc(anchor-size(height) - 1rem);
+    position: absolute;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    border-radius: 100vw;
   }
 }
 
@@ -16,13 +34,14 @@
   font-size: 1rem;
   line-height: 1.5rem;
   letter-spacing: 2px;
-  padding: 0.5rem 1rem;
+  padding: 1rem 1.5rem;
   border-radius: 2.5rem;
   color: var(--white);
   text-transform: uppercase;
-  
-  &.active {
-    background-color: var(--gray-2);
+  z-index: 1;
+
+  &:hover {
+    anchor-name: --h;
   }
 }
 

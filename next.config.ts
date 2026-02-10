@@ -24,9 +24,6 @@ const nextConfig: NextConfig = {
   experimental: {
     viewTransition: true,
   },
-  sassOptions: {
-    silenceDeprecations: ["legacy-js-api"],
-  },
   turbopack: {
     rules: {
       "*.svg": {

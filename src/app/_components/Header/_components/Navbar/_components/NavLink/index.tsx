@@ -7,6 +7,7 @@ import { PropsWithChildren } from "react";
 interface Props extends PropsWithChildren<LinkProps> {
   className?: string;
   activeClassName?: string;
+  href: string;
 }
 
 export const NavLink: React.FC<Props> = ({
@@ -21,7 +22,7 @@ export const NavLink: React.FC<Props> = ({
     <Link
       {...props}
       className={`${className} ${
-        pathname === props.href && activeClassName ? activeClassName : ""
+        pathname.includes(props.href) && activeClassName ? activeClassName : ""
       }`}
     >
       {children}

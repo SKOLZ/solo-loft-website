@@ -5,6 +5,8 @@ import { Footer } from "./_components/Footer";
 import { Header } from "./_components/Header";
 import { PageTransition } from "./_components/PageTransition";
 import { Toaster } from "react-hot-toast";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const poppins = Poppins({
   subsets: ["latin"],
