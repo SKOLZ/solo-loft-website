@@ -15,6 +15,7 @@ import { PropertyAssetsViewer } from "./_components/PropertyAssetsViewer";
 import { buildMetadata } from "@/utils/buildMetadata";
 import { Map } from "./_components/Map";
 import { ErrorBoundary } from "react-error-boundary";
+import { delay } from "@/utils/delay";
 
 interface Props {
   params: Promise<{
@@ -49,6 +50,7 @@ export const generateMetadata = async (props: Props) => {
 };
 
 export const generateStaticParams = async () => {
+  await delay(200);
   const properties = await getAllPropertyIdentifiers();
   return properties.map((property) => ({
     slug: property.slug,
