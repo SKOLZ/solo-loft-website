@@ -26,6 +26,8 @@ export async function GET(context: NextRequest) {
     propertyImageWidth &&
     propertyImageHeight;
 
+  const requestBaseUrl = `${context.nextUrl.protocol}//${context.nextUrl.host}`;
+
   let propertyFormattedImage;
   if (propertyImage) {
     const { baseUrl, handle } = splitGraphAssetUrl(propertyImage);
@@ -40,7 +42,7 @@ export async function GET(context: NextRequest) {
     <>
       <div
         style={{
-          backgroundImage: `url(${SEO_CONFIG.openGraphImage.bg})`,
+          backgroundImage: `url(${requestBaseUrl}${SEO_CONFIG.openGraphImage.bg})`,
           padding: "60px",
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
@@ -59,6 +61,7 @@ export async function GET(context: NextRequest) {
             alignItems: isPropertyImage ? "flex-start" : "center",
             gap: "20px",
             flex: "1",
+            wordBreak: "break-word",
           }}
         >
           {propertyTransactionType && (
@@ -93,17 +96,17 @@ export async function GET(context: NextRequest) {
             {title}
           </h1>
         </div>
-        <div
-          style={{
-            display: "flex",
-            flex: "1",
-            justifyContent: "center",
-          }}
-        >
-          {propertyFormattedImage &&
-            propertyImageWidth &&
-            propertyImageHeight && (
-              // eslint-disable-next-line @next/next/no-img-element
+        {propertyFormattedImage &&
+          propertyImageWidth &&
+          propertyImageHeight && (
+            <div
+              style={{
+                display: "flex",
+                flex: "1",
+                justifyContent: "center",
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element*/}
               <img
                 src={propertyFormattedImage}
                 alt="Property"
@@ -115,8 +118,8 @@ export async function GET(context: NextRequest) {
                   borderRadius: "8px",
                 }}
               />
-            )}
-        </div>
+            </div>
+          )}
       </div>
     </>,
     {
