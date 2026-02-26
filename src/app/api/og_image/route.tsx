@@ -16,8 +16,8 @@ export async function GET(context: NextRequest) {
   const { searchParams } = context.nextUrl;
   const title = searchParams.get("title");
   const propertyImage = searchParams.get("image");
-  const propertyImageWidth = searchParams.get("imageW");
-  const propertyImageHeight = searchParams.get("imageH");
+  const propertyImageWidth = parseInt(searchParams.get("imageW") ?? "");
+  const propertyImageHeight = parseInt(searchParams.get("imageH") ?? "");
   const propertyTransactionType = searchParams.get("transactionType");
 
   const isPropertyImage =
@@ -25,6 +25,11 @@ export async function GET(context: NextRequest) {
     propertyTransactionType &&
     propertyImageWidth &&
     propertyImageHeight;
+
+  const isHorizontalImage =
+    propertyImageWidth &&
+    propertyImageHeight &&
+    propertyImageWidth >= propertyImageHeight;
 
   const requestBaseUrl = `${context.nextUrl.protocol}//${context.nextUrl.host}`;
 
@@ -103,7 +108,7 @@ export async function GET(context: NextRequest) {
               style={{
                 display: "flex",
                 flex: "1",
-                justifyContent: "center",
+                alignItems: "center",
               }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element*/}
@@ -111,11 +116,18 @@ export async function GET(context: NextRequest) {
                 src={propertyFormattedImage}
                 alt="Property"
                 style={{
-                  maxHeight: "580px",
-                  width: `${(580 * parseInt(propertyImageWidth)) / parseInt(propertyImageHeight)}px`,
-                  maxWidth: "580px",
-                  objectFit: "contain",
+                  width: `${
+                    isHorizontalImage
+                      ? 580
+                      : (600 * propertyImageWidth) / propertyImageHeight
+                  }px`,
+                  height: `${
+                    isHorizontalImage
+                      ? (580 * propertyImageHeight) / propertyImageWidth
+                      : 600
+                  }px`,
                   borderRadius: "8px",
+                  backgroundColor: "red",
                 }}
               />
             </div>
