@@ -4,7 +4,7 @@
   &::before {
     content: '';
     display: block;
-    height: 1px;
+    height: 0.5px;
     width: 100dvw;
     max-width: 100%;
     background-color: oklch(from var(--white) l c h / 0.12);
@@ -20,12 +20,12 @@
   }
 
   &::after {
-    content: url('../../../assets/cross.svg');
+    content: url('/cross.svg');
     display: block;
     width: 20px;
     height: 20px;
     position: absolute;
-    top: -9px;
+    top: -9.5px;
     left: max((100% - 1280px) / 2 + 2.5rem - 9px, 2.5rem - 9px);
     z-index: 1;
     transition: opacity var(--line-fade-duration) ease;

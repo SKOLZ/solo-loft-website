@@ -4,6 +4,18 @@ import styles from "./styles.module.scss";
 import { getContactInformation } from "@/services/contactInformation";
 import { Suspense } from "react";
 import { ContactFormInner } from "./_components/ContactForm/_components/ContactFormInner";
+import { buildMetadata } from "@/utils/buildMetadata";
+
+export const generateMetadata = async () => {
+  return await buildMetadata(
+    {
+      title: "Contacto",
+      description:
+        "Ponte en contacto con nosotros para más información sobre las propiedades de Solo Loft.",
+    },
+    `/contact`,
+  );
+};
 
 interface Props {
   searchParams?: Promise<{ [key: string]: string | undefined }>;

@@ -30,7 +30,22 @@ export const generateMetadata = async (props: Props) => {
     return null;
   }
 
-  return buildMetadata(property.seo, `/properties/${params.slug}`);
+  if (property.photos?.[0]) {
+    return buildMetadata(property.seo, `/properties/${params.slug}`, {
+      imageUrl: property.photos[0].url,
+      transactionType: property.transactionType,
+      imageWidth: property.photos[0].width || 580,
+      imageHeight: property.photos[0].height || 580,
+    });
+  } else {
+    return buildMetadata(
+      property.seo || {
+        title: property.address,
+        description: `Propiedad en ${property.transactionType} en ${property.address}, ${property.district ? districtTextMap[property.district] : "Capital Federal"}.`,
+      },
+      `/properties/${params.slug}`,
+    );
+  }
 };
 
 export const generateStaticParams = async () => {

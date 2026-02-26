@@ -80,11 +80,9 @@
 @keyframes reveal-card {
   from {
     opacity: 0;
-    translate: 0 100px;
   }
 
-  to {
+  100% {
     opacity: 1;
-    translate: 0 0;
   }
 }

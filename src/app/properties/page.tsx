@@ -2,16 +2,19 @@ import { getAllProperties } from "@/services/properties";
 import { notFound } from "next/navigation";
 import { PropertyCard } from "./_components/PropertyCard";
 import styles from "./styles.module.scss";
-import { Metadata } from "next";
+import { buildMetadata } from "@/utils/buildMetadata";
 
-export const metadata: Metadata = {
-  title: "Solo Loft - Propiedades",
-  description: "Encuentra las mejores propiedades en Solo Loft",
+export const generateMetadata = async () => {
+  return await buildMetadata(
+    {
+      title: "Propiedades",
+      description: "Encuentra las mejores propiedades en Solo Loft",
+    },
+    `/properties`,
+  );
 };
 
-interface Props {}
-
-const Properties: React.FC<Props> = async () => {
+const Properties: React.FC = async () => {
   const properties = await getAllProperties();
 
   if (!properties) {

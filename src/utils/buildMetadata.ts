@@ -6,26 +6,60 @@ import { SeoFragment } from "@/generated/graphql";
 export type SeoMetadata = Metadata &
   SeoFragment & { type?: OpenGraphType; publishedTime?: string };
 
-export const buildMetadata = (
+export const buildMetadata = async (
   seo: SeoMetadata,
-  currentPath: string
-): Metadata => {
+  currentPath: string,
+  relatedProperty?: {
+    imageUrl: string;
+    transactionType: string;
+    imageWidth: number;
+    imageHeight: number;
+  },
+): Promise<Metadata> => {
   const {
     title: seoTitle,
     description: seoDescription,
     image,
-    publishedTime,
     type = "website",
   } = seo;
 
   const title = seoTitle || SEO_CONFIG.title;
   const description = seoDescription || SEO_CONFIG.description;
 
-  // Image
-  const ogImage = image?.url || "";
-  const ogImageWidth = image?.width || "";
-  const ogImageHeight = image?.height || "";
-  const ogMimeType = image?.mimeType || "";
+  let ogImage: string;
+  let ogImageWidth: number;
+  let ogImageHeight: number;
+  let ogMimeType: string;
+
+  if (image) {
+    ogImage = image.url;
+    ogImageWidth = image.width || SEO_CONFIG.openGraphImage.width;
+    ogImageHeight = image.height || SEO_CONFIG.openGraphImage.height;
+    ogMimeType = image.mimeType || SEO_CONFIG.openGraphImage.type;
+  } else {
+    const searchParams = new URLSearchParams({
+      title,
+      ...(relatedProperty?.imageUrl && { image: relatedProperty.imageUrl }),
+      ...(relatedProperty?.transactionType && {
+        transactionType: relatedProperty.transactionType,
+      }),
+      ...(relatedProperty?.imageWidth && {
+        imageW: relatedProperty.imageWidth.toString(),
+      }),
+      ...(relatedProperty?.imageHeight && {
+        imageH: relatedProperty.imageHeight.toString(),
+      }),
+    });
+
+    const generatedImage =
+      process.env.NODE_ENV === "production"
+        ? `/api/og_image?${searchParams.toString()}`
+        : `http://localhost:3000/api/og_image?${searchParams.toString()}`;
+    ogImage = generatedImage;
+    ogImageWidth = SEO_CONFIG.openGraphImage.width;
+    ogImageHeight = SEO_CONFIG.openGraphImage.height;
+    ogMimeType = SEO_CONFIG.openGraphImage.type;
+  }
 
   return {
     metadataBase: new URL("https://solo-loft.com.ar"),
@@ -42,7 +76,6 @@ export const buildMetadata = (
       url: currentPath,
       title,
       description,
-      publishedTime,
       type,
       images: [
         {
