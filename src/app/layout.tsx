@@ -4,6 +4,7 @@ import "@/styles/globals.scss";
 import { Footer } from "./_components/Footer";
 import { Header } from "./_components/Header";
 import { PageTransition } from "./_components/PageTransition";
+import { Analytics } from "@vercel/analytics/next";
 import { Toaster } from "react-hot-toast";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body id="root" className={`${poppins.variable} body`}>
         <Header />
         <PageTransition>{children}</PageTransition>
+        <Analytics />
         <Footer />
         <Toaster
           toastOptions={{
