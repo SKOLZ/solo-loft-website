@@ -112,7 +112,7 @@
 
     &::before {
       opacity: 0;
-      transition: opacity 1.2s ease 0.3s;
+      transition: opacity 1.2s ease 0.3s, top 0.3s ease, left 0.3s ease, width 0.3s ease, height 0.3s ease;
     }
   }
 
@@ -145,7 +145,7 @@
     &::after {
       rotate: -45deg;
       scale: 1.12 1;
-      translate: 2px 4px;
+      translate: 2px 3px;
     }
   }
 
