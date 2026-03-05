@@ -19,7 +19,7 @@
     content: '';
     position-anchor: --h;
     left: calc(anchor(left) + 0.5rem);
-    top: 0.5rem;
+    top: calc(anchor(top) + 0.5rem);
     background-color: var(--gray-2);
     width: calc(anchor-size(width) - 1rem);
     height: calc(anchor-size(height) - 1rem);
@@ -64,7 +64,7 @@
     background-color: var(--white);
     border-radius: 0.125rem;
     position: absolute;
-    transition: scale 0.3s ease, rotate 0.5s ease;
+    transition: scale 0.3s ease, rotate 0.5s ease, translate 0.5s ease;
     will-change: scale;
     transform: translateZ(0);
     pointer-events: none;
@@ -97,7 +97,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  :global(.body):has(.navbar .hamburger-checkbox:checked) {
+  :global(.body):has(.navbar .hamburgerCheckbox:checked) {
     overflow: hidden;
   }
 
@@ -109,6 +109,11 @@
     background-color: transparent;
     transition: background-color 0.5s ease;
     padding: 0;
+
+    &::before {
+      opacity: 0;
+      transition: opacity 1.2s ease 0.3s;
+    }
   }
 
   .navbar:has(.hamburgerCheckbox:checked) {
@@ -116,30 +121,38 @@
     inset: 0;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
     border-radius: 0;
     z-index: 2;
     padding: 2.5rem 0.5rem 6rem;
     background-color: var(--black);
+
+    &::before {
+      opacity: 1;
+      top: calc(anchor(top) + 1.5rem);
+      height: calc(anchor-size(height) - 3rem);
+    }
   }
   
   .hamburger:has(.hamburgerCheckbox:checked) {
     margin-bottom: auto;
 
     &::before {
-      rotate: 30deg;
+      rotate: 45deg;
       scale: 1.12 1;
+      translate: 2px -2px;
     }
 
     &::after {
-      rotate: -30deg;
+      rotate: -45deg;
       scale: 1.12 1;
+      translate: 2px 4px;
     }
   }
 
   .navbarItem {
     display: none;
     opacity: 0;
+    padding: 2rem 1.5rem;
 
     &:last-child {
       margin-bottom: auto;
@@ -147,12 +160,12 @@
   }
 
   .navbar:has(.hamburgerCheckbox:checked) .navbarItem {
+    display: block;
+    opacity: 1;
+    transition: opacity 1.2s ease calc(0.3s + sibling-index() * 0.1s);
     @starting-style {
       opacity: 0;
     }
-    display: block;
-    opacity: 1;
-    transition: opacity 2s ease;
   }
 }
 

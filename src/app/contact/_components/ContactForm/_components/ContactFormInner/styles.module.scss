@@ -36,6 +36,12 @@
   &:focus-visible {
     outline: 2px solid var(--gray-2);
   }
+
+  
+  &:disabled {
+    background-color: var(--gray-0h);
+    cursor: not-allowed;
+  }
 }
 
 .contactError {
@@ -67,6 +73,10 @@
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+
+  &:hover {
+    background-color: oklch(from var(--white) l c h / 0.16);
   }
 }
 

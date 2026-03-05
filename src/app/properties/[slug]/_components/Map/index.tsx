@@ -1,8 +1,8 @@
 "use client";
 
 import style from "./styles.module.scss";
-import MapContainer, { Marker } from "react-map-gl/maplibre";
-import "maplibre-gl/dist/maplibre-gl.css";
+import { useEffect, useRef } from "react";
+import "leaflet/dist/leaflet.css";
 
 interface Props {
   lat: number;
@@ -10,33 +10,64 @@ interface Props {
 }
 
 export const Map: React.FC<Props> = ({ lat, lng }) => {
-  return (
-    <div className={style.mapContainer}>
-      <MapContainer
-        initialViewState={{
-          latitude: lat,
-          longitude: lng,
-          zoom: 15,
-        }}
-        mapStyle="/style.json"
-      >
-        <Marker longitude={lng} latitude={lat} anchor="bottom" draggable>
-          <svg
-            height={40}
-            viewBox="-2 -2 28 28"
-            stroke="#fff"
-            strokeWidth="2"
-            fill="#000"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M20.2,15.7L20.2,15.7c1.1-1.6,1.8-3.6,1.8-5.7c0-5.6-4.5-10-10-10S2,4.5,2,10c0,2,0.6,3.9,1.6,5.4c0,0.1,0.1,0.2,0.2,0.3
-  c0,0,0.1,0.1,0.1,0.2c0.2,0.3,0.4,0.6,0.7,0.9c2.6,3.1,7.4,7.6,7.4,7.6s4.8-4.5,7.4-7.5c0.2-0.3,0.5-0.6,0.7-0.9
-  C20.1,15.8,20.2,15.8,20.2,15.7z"
-            />
-          </svg>
-        </Marker>
-      </MapContainer>
-    </div>
-  );
+  const containerRef = useRef<HTMLDivElement>(null);
+  const mapRef = useRef<any>(null);
+
+  useEffect(() => {
+    import("leaflet").then((L) => {
+      if (!containerRef.current) return;
+
+      // Cleanup existing map if it exists
+      if (mapRef.current) {
+        mapRef.current.remove();
+        mapRef.current = null;
+      }
+
+      // Fixes a 1px gap between tiles in Leaflet
+      var originalInitTile = (L.GridLayer.prototype as any)._initTile;
+      L.GridLayer.include({
+        _initTile: function (tile: {
+          style: { width: string; height: string };
+        }) {
+          originalInitTile.call(this, tile);
+
+          var tileSize = this.getTileSize();
+
+          tile.style.width = tileSize.x + 0.5 + "px";
+          tile.style.height = tileSize.y + 0.5 + "px";
+        },
+      });
+
+      const map = L.map(containerRef.current, {
+        center: [lat, lng],
+        zoom: 16,
+      });
+      map.scrollWheelZoom.disable();
+      mapRef.current = map;
+
+      L.tileLayer(
+        "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+        {
+          maxZoom: 20,
+        },
+      ).addTo(map);
+
+      const marker = L.icon({
+        iconUrl: "/marker.svg",
+        iconSize: [40, 40],
+        iconAnchor: [20, 40],
+      });
+
+      L.marker([lat, lng], { icon: marker }).addTo(map);
+    });
+
+    return () => {
+      if (mapRef.current) {
+        mapRef.current.remove();
+        mapRef.current = null;
+      }
+    };
+  }, [lat, lng]);
+
+  return <div className={style.mapContainer} ref={containerRef} />;
 };
