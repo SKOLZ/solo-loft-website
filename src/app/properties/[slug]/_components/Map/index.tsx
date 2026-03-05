@@ -11,29 +11,39 @@ interface Props {
 
 export const Map: React.FC<Props> = ({ lat, lng }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const mapRef = useRef<any>(null);
+
   useEffect(() => {
     import("leaflet").then((L) => {
       if (!containerRef.current) return;
+
+      // Cleanup existing map if it exists
+      if (mapRef.current) {
+        mapRef.current.remove();
+        mapRef.current = null;
+      }
+
       // Fixes a 1px gap between tiles in Leaflet
-      (function () {
-        var originalInitTile = (L.GridLayer.prototype as any)._initTile;
-        L.GridLayer.include({
-          _initTile: function (tile: {
-            style: { width: string; height: string };
-          }) {
-            originalInitTile.call(this, tile);
+      var originalInitTile = (L.GridLayer.prototype as any)._initTile;
+      L.GridLayer.include({
+        _initTile: function (tile: {
+          style: { width: string; height: string };
+        }) {
+          originalInitTile.call(this, tile);
 
-            var tileSize = this.getTileSize();
+          var tileSize = this.getTileSize();
 
-            tile.style.width = tileSize.x + 0.5 + "px";
-            tile.style.height = tileSize.y + 0.5 + "px";
-          },
-        });
-      })();
+          tile.style.width = tileSize.x + 0.5 + "px";
+          tile.style.height = tileSize.y + 0.5 + "px";
+        },
+      });
+
       const map = L.map(containerRef.current, {
         center: [lat, lng],
         zoom: 16,
       });
+      map.scrollWheelZoom.disable();
+      mapRef.current = map;
 
       L.tileLayer(
         "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
@@ -50,6 +60,13 @@ export const Map: React.FC<Props> = ({ lat, lng }) => {
 
       L.marker([lat, lng], { icon: marker }).addTo(map);
     });
+
+    return () => {
+      if (mapRef.current) {
+        mapRef.current.remove();
+        mapRef.current = null;
+      }
+    };
   }, [lat, lng]);
 
   return <div className={style.mapContainer} ref={containerRef} />;

@@ -76,6 +76,10 @@
   border: 1px solid var(--white);
   background-color: oklch(from var(--white) l c h / 0.12);
   align-items: center;
+
+  &:hover {
+    background-color: oklch(from var(--white) l c h / 0.16);
+  }
 }
 
 .propertyDescription {
