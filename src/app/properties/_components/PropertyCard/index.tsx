@@ -31,8 +31,8 @@ export const PropertyCard: React.FC<Props> = ({ propertySummary }) => {
             <Image
               className={styles.propertyCardImage}
               key={photo.url}
-              width={308}
-              height={234}
+              width={photo.width || undefined}
+              height={photo.height || undefined}
               src={photo.url}
               alt="Property"
             />
@@ -41,8 +41,8 @@ export const PropertyCard: React.FC<Props> = ({ propertySummary }) => {
       ) : (
         <Image
           className={styles.propertyCardImage}
-          width={308}
-          height={234}
+          width={propertySummary.photos[0].width || undefined}
+          height={propertySummary.photos[0].height || undefined}
           src={propertySummary.photos[0].url}
           alt="Property"
         />

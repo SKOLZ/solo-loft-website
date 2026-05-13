@@ -12,5 +12,7 @@ fragment PropertySummary on Property {
   expenses
   photos(first: 5) {
     url
+    width
+    height
   }
 }

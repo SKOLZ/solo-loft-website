@@ -78,8 +78,8 @@ export const PropertyAssetsViewer: React.FC<Props> = ({
             >
               <Image
                 className={styles.propertyPhoto}
-                width={500}
-                height={375}
+                width={photo.width || undefined}
+                height={photo.height || undefined}
                 src={photo.url}
                 priority={index === 0}
                 alt=""
