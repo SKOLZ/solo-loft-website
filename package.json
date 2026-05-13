@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "codegen": "graphql-codegen --config codegen.ts"
   },
+  "packageManager": "pnpm@11.1.1",
   "dependencies": {
     "@graphcms/rich-text-react-renderer": "^0.6.2",
     "@hookform/resolvers": "^3.9.0",
