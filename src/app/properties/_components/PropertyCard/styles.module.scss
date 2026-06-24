@@ -8,6 +8,12 @@
   animation: reveal-card both;
   animation-timeline: view();
   animation-range: entry 20% cover 30%;
+  border: 1px solid transparent;
+  transition: border 0.5s;
+
+  &:hover {
+    border: 1px solid var(--gray-2);
+  }
 }
 
 .propertyCardImage {

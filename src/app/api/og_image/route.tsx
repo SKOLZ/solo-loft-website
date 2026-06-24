@@ -46,6 +46,8 @@ export async function GET(context: NextRequest) {
   return new ImageResponse(
     <>
       <div
+        lang="es-AR"
+        translate="no"
         style={{
           backgroundImage: `url(${requestBaseUrl}${SEO_CONFIG.openGraphImage.bg})`,
           padding: "60px",
@@ -71,6 +73,7 @@ export async function GET(context: NextRequest) {
         >
           {propertyTransactionType && (
             <p
+              translate="no"
               style={{
                 fontSize: "2.5rem",
                 lineHeight: "3.75rem",
@@ -88,6 +91,7 @@ export async function GET(context: NextRequest) {
             </p>
           )}
           <h1
+            translate="no"
             style={{
               fontSize: "6.25rem",
               lineHeight: "7.5rem",

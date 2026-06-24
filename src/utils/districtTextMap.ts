@@ -5,4 +5,5 @@ export const districtTextMap: Record<District, string> = {
   colegialesCapitalFederal: "Colegiales, Capital Federal",
   palermoHollywoodCapitalFederal: "Palermo Hollywood, Capital Federal",
   parquePatriciosCapitalFederal: "Parque Patricios, Capital Federal",
+  sanIsidroBuenosAires: "San Isidro, Buenos Aires",
 };
