@@ -3,6 +3,7 @@ import { ImageResponse } from "next/og";
 import { SEO_CONFIG } from "@/utils/seoConfig";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { transactionTypeTextMap } from "@/app/_components/TransactionTypeTag/utils";
 
 function splitGraphAssetUrl(url: string): { baseUrl: string; handle: string } {
   const lastSlashIndex = url.lastIndexOf("/");
@@ -12,6 +13,7 @@ function splitGraphAssetUrl(url: string): { baseUrl: string; handle: string } {
 }
 
 // Image generation
+// example http://localhost:3000/api/og_image?image=https%3A%2F%2Fsa-east-1.graphassets.com%2Fclzbzounr059207j00w2u668e%2Fcm5b50umk02h406lt8xb1xucp&imageW=480&imageH=854&transactionType=sale&title=Dorrego%201940
 export async function GET(context: NextRequest) {
   const { searchParams } = context.nextUrl;
   const title = searchParams.get("title");
@@ -46,8 +48,6 @@ export async function GET(context: NextRequest) {
   return new ImageResponse(
     <>
       <div
-        lang="es-AR"
-        translate="no"
         style={{
           backgroundImage: `url(${requestBaseUrl}${SEO_CONFIG.openGraphImage.bg})`,
           padding: "60px",
@@ -73,7 +73,6 @@ export async function GET(context: NextRequest) {
         >
           {propertyTransactionType && (
             <p
-              translate="no"
               style={{
                 fontSize: "2.5rem",
                 lineHeight: "3.75rem",
@@ -87,11 +86,12 @@ export async function GET(context: NextRequest) {
                 border: `1px solid ${propertyTransactionType === "sale" ? "#610000" : "#002761"}`,
               }}
             >
-              {propertyTransactionType.toUpperCase()}
+              {transactionTypeTextMap[
+                propertyTransactionType as keyof typeof transactionTypeTextMap
+              ]?.toUpperCase()}
             </p>
           )}
           <h1
-            translate="no"
             style={{
               fontSize: "6.25rem",
               lineHeight: "7.5rem",

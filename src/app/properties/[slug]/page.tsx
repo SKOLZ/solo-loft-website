@@ -15,6 +15,7 @@ import { PropertyAssetsViewer } from "./_components/PropertyAssetsViewer";
 import { buildMetadata } from "@/utils/buildMetadata";
 import { Map } from "./_components/Map";
 import { delay } from "@/utils/delay";
+import { transactionTypeTextMap } from "@/app/_components/TransactionTypeTag/utils";
 
 interface Props {
   params: Promise<{
@@ -32,7 +33,7 @@ export const generateMetadata = async (props: Props) => {
 
   let seo = property.seo || {
     title: property.address,
-    description: `Propiedad en ${property.transactionType} en ${property.address}, ${property.district ? districtTextMap[property.district] : "Capital Federal"}.`,
+    description: `Propiedad en ${transactionTypeTextMap[property.transactionType]} en ${property.address}, ${property.district ? districtTextMap[property.district] : "Capital Federal"}.`,
   };
 
   if (property.photos?.[0]) {
