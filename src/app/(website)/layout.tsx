@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "@/styles/globals.scss";
-import { Footer } from "./_components/Footer";
-import { Header } from "./_components/Header";
+import { Footer } from "../_components/Footer";
+import { Header } from "../_components/Header";
 import { PageTransition } from "./_components/PageTransition";
 import { Analytics } from "@vercel/analytics/next";
 import { Toaster } from "react-hot-toast";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Navbar } from "./_components/Navbar";
+import { Hero } from "../_components/Hero";
+import styles from "./styles.module.scss";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -29,7 +32,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body id="root" className={`${poppins.variable} body`}>
-        <Header />
+        <Header>
+          <Navbar />
+          <Hero className={styles.hero} />
+        </Header>
         <PageTransition>{children}</PageTransition>
         <Analytics />
         <Footer />

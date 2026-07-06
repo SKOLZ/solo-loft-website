@@ -6,7 +6,7 @@ import Image from "next/image";
 import { AssetCarousel } from "./_components/AssetCarousel";
 import styles from "./styles.module.scss";
 import { getYouTubeVideoId } from "@/utils/getYouTuveVideoId";
-import { YoutubeEmbed } from "@/app/_components/YouTubeEmbed";
+import { YoutubeEmbed } from "@/app/(website)/_components/YouTubeEmbed";
 import "@/styles/overrides/react-modal.scss";
 import Slider from "react-slick";
 import { AssetModal } from "./_components/AssetModal";
@@ -23,7 +23,7 @@ export const PropertyAssetsViewer: React.FC<Props> = ({
   className,
 }) => {
   const [activeAssetType, setActiveAssetType] = useState<AssetType>(() =>
-    videos.length ? ASSET_TYPES.videos : ASSET_TYPES.photos
+    videos.length ? ASSET_TYPES.videos : ASSET_TYPES.photos,
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);

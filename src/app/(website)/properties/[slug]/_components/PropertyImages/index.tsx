@@ -1,6 +1,6 @@
 "use client";
 
-import { Carousel } from "@/app/_components/Carousel";
+import { Carousel } from "@/app/(website)/_components/Carousel";
 import { PropertyFragment } from "@/generated/graphql";
 import Image from "next/image";
 import styles from "./styles.module.scss";

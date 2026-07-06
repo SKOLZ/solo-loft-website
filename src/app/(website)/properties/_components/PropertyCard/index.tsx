@@ -6,7 +6,7 @@ import { formatNumber } from "@/utils/formatNumber";
 import Link from "next/link";
 import { PropertyFeatures } from "@/app/_components/PropertyFeatures";
 import { districtTextMap } from "@/utils/districtTextMap";
-import { Carousel } from "@/app/_components/Carousel";
+import { Carousel } from "@/app/(website)/_components/Carousel";
 
 interface Props {
   propertySummary: PropertySummaryFragment;

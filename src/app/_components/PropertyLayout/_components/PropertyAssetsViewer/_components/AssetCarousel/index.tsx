@@ -1,5 +1,5 @@
-import { Carousel } from "@/app/_components/Carousel";
-import { SliderArrowVariant } from "@/app/_components/Carousel/_components/SliderArrow/types";
+import { Carousel } from "@/app/(website)/_components/Carousel";
+import { SliderArrowVariant } from "@/app/(website)/_components/Carousel/_components/SliderArrow/types";
 import Slider, { Settings } from "react-slick";
 
 interface Props<T> {

@@ -16,6 +16,7 @@
     "@marsidev/react-turnstile": "^1.1.0",
     "@svgr/webpack": "^8.1.0",
     "@vercel/analytics": "^1.6.1",
+    "classnames": "^2.5.1",
     "graphql": "^16.9.0",
     "graphql-request": "^7.1.0",
     "graphql-tag": "^2.12.6",
