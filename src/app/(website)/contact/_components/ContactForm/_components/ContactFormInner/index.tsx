@@ -28,12 +28,11 @@ export const ContactFormInner: React.FC<Props> = ({
   const [turnstileToken, setTurnstileToken] = useState<string>("");
   const defaultValues = useMemo(
     () => ({
-      propertyId: initialPropertyId,
       name: "",
       email: "",
       phone: "54",
     }),
-    [initialPropertyId],
+    [],
   );
   const {
     register,
@@ -41,7 +40,7 @@ export const ContactFormInner: React.FC<Props> = ({
     formState: { errors },
     reset,
     control,
-  } = useForm<ContactFormData>({
+  } = useForm<Omit<ContactFormData, "propertyId">>({
     resolver: zodResolver(contactSchema),
     defaultValues,
     disabled: isDisabled,
@@ -50,7 +49,10 @@ export const ContactFormInner: React.FC<Props> = ({
   const onSubmit = async (formData: ContactFormData) => {
     setisLoading(true);
     const response = await sendEmail({
-      formData,
+      formData: {
+        ...formData,
+        propertyId: initialPropertyId,
+      },
       turnstileToken,
     });
     setisLoading(false);
@@ -64,19 +66,6 @@ export const ContactFormInner: React.FC<Props> = ({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.contactForm}>
-      <div className={styles.contactField}>
-        <label htmlFor="propertyId" className={styles.contactLabel}>
-          Propiedad de interes
-        </label>
-        <select className={styles.contactInput} {...register("propertyId")}>
-          <option value="">--</option>
-          {propertyIdentifiers.map((propertyIdentifier) => (
-            <option key={propertyIdentifier.id} value={propertyIdentifier.id}>
-              {propertyIdentifier.name}
-            </option>
-          ))}
-        </select>
-      </div>
       <div className={styles.contactField}>
         <label htmlFor="name" className={styles.contactLabel}>
           Nombre*

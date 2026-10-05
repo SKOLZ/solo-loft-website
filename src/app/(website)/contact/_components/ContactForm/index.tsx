@@ -13,6 +13,7 @@ export const ContactForm: React.FC<ContactFormProps> = async ({
   const initialPropertyIdValue = await initialPropertyId;
   return (
     <ContactFormInner
+      key={initialPropertyIdValue}
       initialPropertyId={initialPropertyIdValue}
       propertyIdentifiers={propertyIdentifiers}
     />

@@ -9,10 +9,13 @@ export async function POST(request: NextRequest) {
     case "Property":
       revalidateTag(CACHE_TAGS.PROPERTIES, { expire: 0 });
       revalidateTag(CACHE_TAGS.PROPERTY(publishedPage.data.id), { expire: 0 });
+      break;
     case "ContactInformation":
       revalidateTag(CACHE_TAGS.CONTACT, { expire: 0 });
+      break;
     case "AboutUs":
       revalidateTag(CACHE_TAGS.ABOUT_US, { expire: 0 });
+      break;
   }
   return Response.json({ revalidated: true, now: Date.now() });
 }
