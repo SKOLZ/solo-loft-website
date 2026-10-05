@@ -6,7 +6,6 @@ import { notFound } from "next/navigation";
 import { districtTextMap } from "@/utils/districtTextMap";
 
 import { buildMetadata } from "@/utils/buildMetadata";
-import { delay } from "@/utils/delay";
 import { transactionTypeTextMap } from "@/app/_components/TransactionTypeTag/utils";
 import { PropertyLayout } from "@/app/_components/PropertyLayout";
 
@@ -42,7 +41,6 @@ export const generateMetadata = async (props: Props) => {
 };
 
 export const generateStaticParams = async () => {
-  await delay(200);
   const properties = await getAllPropertyIdentifiers();
   return properties.map((property) => ({
     slug: property.slug,

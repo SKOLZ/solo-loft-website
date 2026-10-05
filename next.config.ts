@@ -22,9 +22,6 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  experimental: {
-    viewTransition: true,
-  },
   turbopack: {
     rules: {
       "*.svg": {
