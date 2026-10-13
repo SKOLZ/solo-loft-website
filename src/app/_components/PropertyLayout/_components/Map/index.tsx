@@ -2,10 +2,47 @@
 
 import style from "./styles.module.scss";
 import { useEffect, useRef } from "react";
+import type {
+  Map as MapLibreMap,
+  Marker as MapLibreMarker,
+  StyleSpecification,
+} from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
-type MapLibreMap = import("maplibre-gl").Map;
-type MapLibreMarker = import("maplibre-gl").Marker;
+const STYLE_URL = "https://tiles.openfreemap.org/styles/dark";
+
+/**
+ * OpenFreeMap's `dark` style is an unmodified fork of the upstream dark-matter
+ * style, and it still asks for a `wood-pattern` sprite image that OpenFreeMap's
+ * sprite does not ship.
+ *
+ * MapLibre resolves fill patterns while processing the first tiles, which
+ * happens *before* `load` fires, so patching the layer in `load` only fixes the
+ * rendering and still logs
+ * "Image \"wood-pattern\" could not be loaded" once. Dropping the broken
+ * reference from the style JSON means MapLibre never asks for it. The layer
+ * keeps its own `fill-color` and opacity ramp, which is how the woods read on a
+ * dark basemap anyway.
+ */
+function dropMissingWoodPattern(
+  styleSpec: StyleSpecification,
+): StyleSpecification {
+  return {
+    ...styleSpec,
+    layers: styleSpec.layers.map((layer) => {
+      if (
+        layer.id !== "landcover_wood" ||
+        !("paint" in layer) ||
+        !layer.paint
+      ) {
+        return layer;
+      }
+      const paint: Record<string, unknown> = { ...layer.paint };
+      delete paint["fill-pattern"];
+      return { ...layer, paint } as typeof layer;
+    }),
+  };
+}
 
 interface Props {
   lat: number;
@@ -26,7 +63,7 @@ export const Map: React.FC<Props> = ({ lat, lng }) => {
 
     // Loaded lazily because maplibre-gl touches browser globals on import while
     // Next.js still server-renders this client component.
-    import("maplibre-gl").then((maplibregl) => {
+    import("maplibre-gl").then(async (maplibregl) => {
       if (cancelled) return;
 
       // MapLibre resolves its worker relative to `import.meta.url`, which does
@@ -35,15 +72,31 @@ export const Map: React.FC<Props> = ({ lat, lng }) => {
       // map mounts and throws "Worker failed to load".
       maplibregl.setWorkerUrl("/maplibre/maplibre-gl-worker.mjs");
 
+      // Best effort: if the style cannot be fetched, fall back to the URL so
+      // the map still mounts — at the cost of the wood-pattern warning.
+      // Named `styleSpec`, not `style`: the latter shadows the SCSS module.
+      let styleSpec: StyleSpecification | string = STYLE_URL;
+      try {
+        const response = await fetch(STYLE_URL);
+        if (response.ok) {
+          styleSpec = dropMissingWoodPattern(
+            (await response.json()) as StyleSpecification,
+          );
+        }
+      } catch {
+        // Keep the URL; MapLibre will retry the style itself.
+      }
+      if (cancelled) return;
+
       // OpenFreeMap: no API key, no registration, no usage limits. Its "dark"
       // style is the same Dark Matter look CARTO ships, just keyless.
       const mapInstance = new maplibregl.Map({
         container,
-        style: "https://tiles.openfreemap.org/styles/dark",
+        style: styleSpec,
         center: [lng, lat],
         // Native resolution: the OpenFreeMap vector source tops out at z14, so
         // this is the only zoom that renders tiles without overzooming them.
-        zoom: 14,
+        zoom: 15,
         scrollZoom: false,
         dragRotate: false,
         pitchWithRotate: false,
@@ -59,24 +112,6 @@ export const Map: React.FC<Props> = ({ lat, lng }) => {
           if (mapInstance.getLayer(layerId)) {
             mapInstance.setLayoutProperty(layerId, "visibility", "none");
           }
-        }
-
-        // The style is an unmodified fork of the upstream dark-matter style and
-        // still asks for a "wood-pattern" sprite image that OpenFreeMap's sprite
-        // does not ship, so MapLibre logs "Image \"wood-pattern\" could not be
-        // loaded" on every paint. Clearing the pattern keeps the layer's own
-        // fill-color and opacity ramp, which is how the woods are meant to look
-        // on a dark basemap anyway.
-        if (mapInstance.getLayer("landcover_wood")) {
-          // Clearing a paint property with `null` is supported at runtime —
-          // `Style.setPaintProperty` skips validation for null/undefined on
-          // purpose — but maplibre-gl 6.14 does not declare the overload in
-          // its .d.ts, hence the cast.
-          mapInstance.setPaintProperty(
-            "landcover_wood",
-            "fill-pattern",
-            null as unknown as string,
-          );
         }
       });
 
