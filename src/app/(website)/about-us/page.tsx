@@ -3,6 +3,7 @@ import styles from "./styles.module.scss";
 import { RichText } from "@graphcms/rich-text-react-renderer";
 import Image from "next/image";
 import { buildMetadata } from "@/utils/buildMetadata";
+import { AboutPageJsonLd } from "@/app/_components/JsonLd/AboutPageJsonLd";
 
 export const generateMetadata = async () => {
   return await buildMetadata(
@@ -18,6 +19,7 @@ const AboutUsPage: React.FC = async () => {
   const { description } = await getAboutUs();
   return (
     <section className={styles.aboutUsContainer}>
+      <AboutPageJsonLd />
       <h1 className={styles.title}>Sobre nosotros</h1>
       <article className={styles.propertyDescription}>
         <RichText

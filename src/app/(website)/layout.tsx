@@ -11,6 +11,8 @@ import "slick-carousel/slick/slick-theme.css";
 import { Navbar } from "./_components/Navbar";
 import { Hero } from "../_components/Hero";
 import styles from "./styles.module.scss";
+import { getContactInformation } from "@/services/contactInformation";
+import { OrganizationJsonLd } from "../_components/JsonLd/OrganizationJsonLd";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -24,14 +26,17 @@ export const metadata: Metadata = {
     "Explora una selección exclusiva de propiedades en venta y alquiler, que incluye apartamentos, casas y espacios comerciales. Ya sea que busques comprar, alquilar o invertir, nuestros anuncios ofrecen información detallada, fotos e información sobre la ubicación para ayudarte a encontrar la opción perfecta. Comienza tu búsqueda hoy y da el primer paso hacia tu propiedad ideal.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const contactInformation = await getContactInformation();
+
   return (
     <html lang="en">
       <body id="root" className={`${poppins.variable} body`}>
+        <OrganizationJsonLd contact={contactInformation} />
         <Header>
           <Navbar />
           <Hero className={styles.hero} />

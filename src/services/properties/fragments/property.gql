@@ -2,6 +2,8 @@ fragment Property on Property {
   id
   transactionType
   address
+  publishedAt
+  updatedAt
   district
   meters
   features(first: 8) {

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { PropertyCard } from "./_components/PropertyCard";
 import styles from "./styles.module.scss";
 import { buildMetadata } from "@/utils/buildMetadata";
+import { PropertiesJsonLd } from "@/app/_components/JsonLd/PropertiesJsonLd";
 
 export const generateMetadata = async () => {
   return await buildMetadata(
@@ -22,11 +23,14 @@ const Properties: React.FC = async () => {
   }
 
   return (
-    <section className={styles.propertiesWrapper}>
-      {properties.map((property) => (
-        <PropertyCard key={property.slug} propertySummary={property} />
-      ))}
-    </section>
+    <>
+      <PropertiesJsonLd properties={properties} />
+      <section className={styles.propertiesWrapper}>
+        {properties.map((property) => (
+          <PropertyCard key={property.slug} propertySummary={property} />
+        ))}
+      </section>
+    </>
   );
 };
 
