@@ -65,6 +65,9 @@ export const buildMetadata = async (
     metadataBase: new URL("https://solo-loft.com.ar"),
     title: `${title} | Solo Loft`,
     description,
+    alternates: {
+      canonical: currentPath,
+    },
     referrer: "no-referrer-when-downgrade",
     twitter: {
       card: "summary_large_image",

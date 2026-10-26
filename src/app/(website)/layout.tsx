@@ -34,7 +34,7 @@ export default async function RootLayout({
   const contactInformation = await getContactInformation();
 
   return (
-    <html lang="en">
+    <html lang="es-AR">
       <body id="root" className={`${poppins.variable} body`}>
         <OrganizationJsonLd contact={contactInformation} />
         <Header>
