@@ -27,14 +27,14 @@ export const PropertyCard: React.FC<Props> = ({ propertySummary }) => {
           }}
           className={styles.propertyCardImage}
         >
-          {propertySummary.photos.map((photo) => (
+          {propertySummary.photos.map((photo, index) => (
             <Image
               className={styles.propertyCardImage}
               key={photo.url}
               width={photo.width || undefined}
               height={photo.height || undefined}
               src={photo.url}
-              alt="Property"
+              alt={`${propertySummary.address} - foto ${index + 1}`}
             />
           ))}
         </Carousel>
@@ -44,7 +44,7 @@ export const PropertyCard: React.FC<Props> = ({ propertySummary }) => {
           width={propertySummary.photos[0].width || undefined}
           height={propertySummary.photos[0].height || undefined}
           src={propertySummary.photos[0].url}
-          alt="Property"
+          alt={`${propertySummary.address} - foto 1`}
         />
       )}
       <div className={styles.propertyCardContent}>

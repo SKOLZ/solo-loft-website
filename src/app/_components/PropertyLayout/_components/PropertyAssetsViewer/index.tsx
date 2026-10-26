@@ -14,12 +14,14 @@ import { AssetModal } from "./_components/AssetModal";
 interface Props {
   photos: PropertyFragment["photos"];
   videos: PropertyFragment["videos"];
+  address: string;
   className?: string;
 }
 
 export const PropertyAssetsViewer: React.FC<Props> = ({
   photos,
   videos,
+  address,
   className,
 }) => {
   const [activeAssetType, setActiveAssetType] = useState<AssetType>(() =>
@@ -55,6 +57,7 @@ export const PropertyAssetsViewer: React.FC<Props> = ({
         isModalOpen={isModalOpen}
         closeModal={closeModal}
         photos={photos}
+        address={address}
         modalSliderRef={modalSliderRef}
         initialSlide={currentPhotoIndex}
         onSlideChange={onSlideChange}
@@ -82,7 +85,7 @@ export const PropertyAssetsViewer: React.FC<Props> = ({
                 height={photo.height || undefined}
                 src={photo.url}
                 priority={index === 0}
-                alt=""
+                alt={`${address} - foto ${index + 1}`}
               />
             </button>
           )}
