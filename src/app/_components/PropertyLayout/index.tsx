@@ -24,6 +24,7 @@ export const PropertyLayout = ({ property }: PropertyLayoutProps) => {
         <PropertyAssetsViewer
           photos={property.photos}
           videos={property.videos}
+          address={property.address}
           className={styles.assetViewer}
         />
         <div className={styles.propertyInfoWrapper}>

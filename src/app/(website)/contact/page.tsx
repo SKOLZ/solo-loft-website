@@ -5,6 +5,7 @@ import { getContactInformation } from "@/services/contactInformation";
 import { Suspense } from "react";
 import { ContactFormInner } from "./_components/ContactForm/_components/ContactFormInner";
 import { buildMetadata } from "@/utils/buildMetadata";
+import { ContactPageJsonLd } from "@/app/_components/JsonLd/ContactPageJsonLd";
 
 export const generateMetadata = async () => {
   return await buildMetadata(
@@ -31,6 +32,7 @@ const ContactPage: React.FC<Props> = async (props) => {
   ]);
   return (
     <section className={styles.contactContainer}>
+      <ContactPageJsonLd />
       <div className={styles.contactInfoContainer}>
         <h1 className={styles.title}>Contacto</h1>
         <ul className={styles.contactInfoFields}>

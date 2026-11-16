@@ -10,6 +10,7 @@ import { districtTextMap } from "@/utils/districtTextMap";
 import { buildMetadata } from "@/utils/buildMetadata";
 import { transactionTypeTextMap } from "@/app/_components/TransactionTypeTag/utils";
 import { PropertyLayout } from "@/app/_components/PropertyLayout";
+import { PropertyJsonLd } from "@/app/_components/JsonLd/PropertyJsonLd";
 
 interface Props {
   params: Promise<{
@@ -59,6 +60,7 @@ const PropertyDetailsPage: React.FC<Props> = async (props) => {
 
   return (
     <>
+      <PropertyJsonLd property={property} slug={params.slug!} />
       <Link className={styles.propertyBackLink} href="/properties">
         <i className="ic ic-chevron-left" />
         Volver al listado

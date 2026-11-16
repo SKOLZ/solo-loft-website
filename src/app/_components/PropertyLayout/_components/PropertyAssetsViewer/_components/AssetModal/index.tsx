@@ -8,6 +8,7 @@ interface Props {
   isModalOpen: boolean;
   closeModal: () => void;
   photos: PropertyFragment["photos"];
+  address: string;
   modalSliderRef: any;
   initialSlide: number;
   onSlideChange: (oldIndex: number, index: number) => void;
@@ -19,6 +20,7 @@ export const AssetModal: React.FC<Props> = ({
   isModalOpen,
   closeModal,
   photos,
+  address,
   modalSliderRef,
   initialSlide,
   onSlideChange,
@@ -60,7 +62,7 @@ export const AssetModal: React.FC<Props> = ({
                 height={photo.height || 375}
                 src={photo.url}
                 priority={index === 0}
-                alt=""
+                alt={`${address} - foto ${index + 1}`}
               />
             </div>
           )}
